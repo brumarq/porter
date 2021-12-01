@@ -1,0 +1,16 @@
+.optionsTable{
+    color: rgb(197, 197, 197);
+}
+
+.optionsTd {
+    width : 20px;
+    border-top: 0px solid black !important;
+}
+
+table>tbody>tr td{
+    border-top: 2px solid black;
+}
+
+.inptTable {
+    height: 30px !important;
+}
