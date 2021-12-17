@@ -14,8 +14,7 @@ loginButton.onclick = ()=>{
             if(xhr.status === 200){
                 let data = JSON.parse(xhr.response);
                 if (data['message'] == "success") {
-                    console.log("yes BOY"); 
-                    document.location.href = "/static/workspace";
+                    document.location.href = "workspace";
                 }
             }
         }

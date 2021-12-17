@@ -13,6 +13,9 @@ class Router {
                 $controller = new userController();
                 $controller->run();
                 break;
+            case 'workspace':
+                require __DIR__.'/backend/views/workplace.php';
+                break;
             /*case 'about':
                 require __DIR__.'/controller/homeController.php';
                 $controller = new homeController();
