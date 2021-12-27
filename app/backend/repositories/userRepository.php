@@ -22,7 +22,33 @@ class UserRepository extends Repository
 
                     return "success";
                 } else {
-                    return "Wrong credentials";
+                    return "Wrong credentials!";
+                }
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function addUser($email, $password, $firstName, $lastName)
+    {
+        try {
+            // Temporary
+            require __DIR__ . '/../../config.php';
+
+            try {
+                $conn = new PDO("mysql:host=$servername;dbname=$databasename", $dbusername, $dbpassword);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $stmt = $conn->prepare('INSERT INTO users (fName, lName, email, password)
+                                        VALUES (:firstName, :lastName, :email, :password); '
+                                    );
+                $stmt->execute(['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password]);
+
+                if ($stmt->rowCount() > 0) {
+                    return "userAdded";
                 }
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();

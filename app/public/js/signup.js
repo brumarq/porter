@@ -1,11 +1,11 @@
-const loginForm = document.querySelector(".loginForm"),
-loginButton = loginForm.querySelector(".btnLogin");
+const signupForm = document.querySelector(".signupForm"),
+signupButton = signupForm.querySelector(".btnSignup");
 
-loginForm.onclick = (e)=>{
+signupForm.onclick = (e)=>{
     e.preventDefault();
 }
 
-loginButton.onclick = ()=>{
+signupButton.onclick = ()=>{
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "userController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -14,9 +14,9 @@ loginButton.onclick = ()=>{
             if(xhr.status === 200){
                 let data = JSON.parse(xhr.response);
                 const result = data['message'];
-
+                
                 if (result == "success") {
-                    document.location.href = "workspace";
+                    //document.location.href = "workspace";
                     document.getElementById("errorMessage").innerHTML = "";
                 } else  {
                     document.getElementById("errorMessage").innerHTML = result;
@@ -25,9 +25,11 @@ loginButton.onclick = ()=>{
         }
     }
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    let email = document.getElementById("signupEmail").value;
+    let password = document.getElementById("signupPassword").value;
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
 
-    xhr.send(`action=login&email=${email}&password=${password}`);
+
+    xhr.send(`action=signup&email=${email}&password=${password}&firstName=${firstName}&lastName=${lastName}`);
 }
-

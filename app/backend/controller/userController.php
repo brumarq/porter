@@ -10,6 +10,9 @@ class userController extends Controller{
                 case 'login':
                     $this->login();
                     break;
+                case 'signup':
+                    $this->signup();
+                    break;
                 
                 default:
                     # code...
@@ -27,6 +30,30 @@ class userController extends Controller{
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $userService = new UserService();
                 $loginResult = $userService->getUser($email, $password);
+                $response->message = $loginResult;
+
+            } else {
+                $response->message = "Enter a valid email!";
+            }
+        } else {
+            $response->message = "Fill in all input fields!";
+        }
+
+        require __DIR__ . "/../views/api/jsonOutput.php";
+    }
+
+    public function signup(){
+        $email =  $_POST['email'];
+        $password =  $_POST['password'];
+        $firstName =  $_POST['firstName'];
+        $lastName =  $_POST['lastName'];
+
+        $response = new stdClass();
+
+        if (!empty($email) && !empty($password) && !empty($firstName) && !empty($lastName)) {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $userService = new UserService();
+                $loginResult = $userService->addUser($email, $password, $firstName, $lastName);
                 $response->message = $loginResult;
 
             } else {

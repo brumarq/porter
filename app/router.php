@@ -4,9 +4,13 @@ class Router {
         
         switch ($url) {
             case '':
+            case 'login':
                 require __DIR__.'/backend/controller/pagesController.php';
                 $controller = new PagesController();
                 $controller->loginPage();
+                break;                
+            case 'signup':
+                require __DIR__.'/backend/views/signup.php';
                 break;
             case 'userController':
                 require __DIR__.'/backend/controller/userController.php';
