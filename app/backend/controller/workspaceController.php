@@ -23,16 +23,14 @@ class workspaceController extends Controller{
     public function loadWorkspace(){
         $userID =  $_SESSION['unique_id'];
 
-        $response = new stdClass();
-
         if (!empty($userID)) {
                 $workspaceService = new WorkspaceService();
-                $workspaces = $workspaceService->loadWorkspace($userID);
-                $response->message = $workspaces;
+                $workspace = $workspaceService->loadWorkspace($userID);
+                $response = $workspace;
         } else {
-            $response->message = "noUser";
+            $response = "noUser";
         }
 
-        require __DIR__ . "/../views/api/jsonOutput.php";
+        require __DIR__ . "/../views/workplace.php";
     }
 }

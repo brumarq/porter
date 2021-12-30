@@ -10,9 +10,6 @@ class UserRepository extends Repository
             require __DIR__ . '/../../config.php';
 
             try {
-                $conn = new PDO("mysql:host=$servername;dbname=$databasename", $dbusername, $dbpassword);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                 $stmt = $conn->prepare('SELECT * FROM users WHERE email=:email AND password=:password');
                 $stmt->execute(['email' => $email, 'password' => $password]);
 

@@ -14,7 +14,10 @@ class Router {
                 require __DIR__.'/backend/views/signup.php';
                 break;
             case 'workspace':
-                require __DIR__.'/backend/views/workplace.php';
+                require __DIR__.'/backend/controller/workspaceController.php';
+                $controller = new workspaceController();
+                $_POST['action'] = "loadWorkspace";
+                $controller->run();
                 break;
             case 'userController':
                 require __DIR__.'/backend/controller/userController.php';
