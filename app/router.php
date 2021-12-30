@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Router {
     public function route($url){
         
@@ -12,14 +13,20 @@ class Router {
             case 'signup':
                 require __DIR__.'/backend/views/signup.php';
                 break;
+            case 'workspace':
+                require __DIR__.'/backend/views/workplace.php';
+                break;
             case 'userController':
                 require __DIR__.'/backend/controller/userController.php';
                 $controller = new userController();
                 $controller->run();
                 break;
-            case 'workspace':
-                require __DIR__.'/backend/views/workplace.php';
+            case 'workspaceController':
+                require __DIR__.'/backend/controller/workspaceController.php';
+                $controller = new workspaceController();
+                $controller->run();
                 break;
+            
             default:
                 echo '404 not found';
                 http_response_code(404);

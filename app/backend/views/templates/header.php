@@ -13,5 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top bg-dark">
           <a class="navbar-brand" href="#">Porter</a>
+          <div class="workspaceSelection"></div>
+          <div class="profile"></div>
         </nav>
-      </header>
+    </header>
