@@ -27,24 +27,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <input class="form-check-input check_inside_table" type="checkbox" id="" value="option1">
-                                </th>
-                                <td>Vaccum Floor</td>
-                                <td>December 21, 2021</td>
-                                <td>Urgent</td>
-                                <td>NoSql</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <input class="form-check-input check_inside_table" type="checkbox" id="" value="option1">
-                                </th>
-                                <td>Vaccum Floor</td>
-                                <td>December 21, 2021</td>
-                                <td>Medium</td>
-                                <td>NoSql</td>
-                            </tr>
+                            <?php
+                            foreach ($workspace->tasks as $task) {
+                            ?> 
+                                <tr>
+                                    <th scope="row">
+                                        <input class="form-check-input check_inside_table" type="checkbox" id="" value="option1">
+                                    </th>
+                                    <td><?php echo $task['taskDescription'] ?> </td>
+                                    <td><?php echo $task['dateTime'] ?></td>
+                                    <td><?php echo $task['priority'] ?></td>
+                                    <td><?php echo $task['subject'] ?></td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>

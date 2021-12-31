@@ -25,7 +25,7 @@ class workspaceController extends Controller{
 
         if (!empty($userID)) {
                 $workspaceService = new WorkspaceService();
-                $workspace = $workspaceService->loadWorkspace($userID);
+                $workspace = $workspaceService->loadWorkspace($userID, null);
                 $response = $workspace;
         } else {
             $response = "noUser";

@@ -25,10 +25,10 @@
                             if (!empty($_SESSION['unique_id'])) {
                             ?> <select class="form-control" name="workspaces" id="workspaces">
                                     <?php
-                                    foreach ($workspace->workspaces as $workspace) {
+                                    foreach ($workspace->workspaces as $selectedWorkspace) {
                                     ?>
-                                        <option id="<?php echo $workspace['id'] ?> ">
-                                            <?php echo $workspace['name'] ?>
+                                        <option id="<?php echo $selectedWorkspace['id'] ?> ">
+                                            <?php echo $selectedWorkspace['name'] ?>
                                         </option>
                                     <?php
                                     }
