@@ -2,9 +2,9 @@
 require __DIR__ . '/../repositories/workspaceRepository.php';
 
 class WorkspaceService {
-    public function loadWorkspace($userID, $workspace) {
+    public function getWorkspaces($userID) {
         $repository = new WorkspaceRepository();
-        $workspace = $repository->loadWorkspace($userID, $workspace);
+        $workspace = $repository->getWorkspaces($userID);
         return $workspace;
     }
 }

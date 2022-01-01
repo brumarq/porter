@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <h2>Tasks
                         <div class="float-right">
-                            <button type="button" class="btn btn-sm btn-secondary-dark">Today</button> 
+                            <button type="button" class="btn btn-sm btn-secondary-dark">Today</button>
                             <button type="button" class="btn btn-sm btn-secondary-dark">Week</button>
                             <button type="button" class="btn btn-sm btn-secondary-dark">All</button>
                         </div>
@@ -29,10 +29,10 @@
                         <tbody>
                             <?php
                             foreach ($workspace->tasks as $task) {
-                            ?> 
+                            ?>
                                 <tr>
-                                    <th scope="row">
-                                        <input class="form-check-input check_inside_table" type="checkbox" id="" value="option1">
+                                    <th scope="row" class="text-center" style="width: 0;">
+                                        <input class="form-check-input check_inside_table" style=" position: relative;" type="checkbox" id="" value="option1">
                                     </th>
                                     <td><?php echo $task['taskDescription'] ?> </td>
                                     <td><?php echo $task['dateTime'] ?></td>
@@ -42,14 +42,42 @@
                             <?php
                             }
                             ?>
+
+                            <tr>
+                                <th scope="row">
+                                    <button type="button" style="margin-top: 15px;" class="btn btn-sm btn-dark">Add</button>
+                                </th>
+                                <td class="pt-3">
+                                    <input type="text" class="form-control input-sm" id="inputTaskDescription" placeholder="Task">
+                                </td>
+                                <td class="pt-3"> 
+                                    <input type="date" class="form-control input-sm" id="inputTaskDescription" placeholder="Task">
+                                </td>
+                                <td class="pt-3">
+                                    <select class="form-control input-sm" name="workspaces" id="workspaces"> 
+                                        <option value="">High</option>
+                                        <option value="">Medium</option>
+                                        <option value="">Low</option>
+                                    </select>
+                                </td>
+                                <td class="pt-3">
+                                <select class="form-control input-sm" name="workspaces" id="workspaces"> 
+                                        <?php
+                                        if ($workspace->subjects != null) {
+                                            foreach ($workspace->subjects as $subject) {
+                                            ?>
+                                                
+                                                <option><?php echo $subject['description'] ?> </option>
+                                                
+                                            <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <button type="button" class="btn btn-sm btn-dark">Add</button>
-                    <button type="button" class="btn btn-sm btn-dark">Delete</button>
                 </div>
             </div>
         </div>
@@ -59,10 +87,17 @@
                 <div class="col-12">
                     <table class="table table-sm">
                         <tbody>
-                            <tr>
-                                <td>Vaccum Floor</td>
-                            </tr>
-                            <tr>
+                        <?php
+                        if ($workspace->subjects != null) {
+                            foreach ($workspace->subjects as $subject) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $subject['description'] ?> </td>
+                                    </tr>
+                                <?php
+                                }
+                        }
+                        ?> 
                         </tbody>
                     </table>
 
@@ -82,10 +117,7 @@
                 <div class="col-12">
                     <table class="table table-sm">
                         <tbody>
-                            <tr>
-                                <td>Vaccum Floor</td>
-                            </tr>
-                            <tr>
+                        
                         </tbody>
                     </table>
 
