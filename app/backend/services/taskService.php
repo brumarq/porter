@@ -6,6 +6,11 @@ class TaskService {
         $repository = new TaskRepository();
         return $repository->getTasks($workspace);  
     }
+
+    public function addTask($task) {
+        $repository = new TaskRepository();
+        return $repository->addTask($task);  
+    }
 }
 
 ?>

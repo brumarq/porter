@@ -2,11 +2,12 @@
 
 namespace Model;
 
-class Workspace {
+class Subject {
 
     protected $id;
     protected $name;
     protected $user;
+
 
     public function __construct($id, $name, $user) {
         $this->id = $id;

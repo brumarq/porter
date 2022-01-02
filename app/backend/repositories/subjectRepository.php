@@ -17,7 +17,7 @@ class SubjectRepository extends Repository
         }
 
         // Getting all the subjects of specific workspace
-        $tasksSql = $conn->prepare('SELECT description
+        $tasksSql = $conn->prepare('SELECT id, description
                                     FROM subjects
                                     WHERE subjects.fkWorkspace=:workspaceID'
                                 );

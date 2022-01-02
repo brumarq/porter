@@ -29,7 +29,11 @@ class Router {
                 $controller = new workspaceController();
                 $controller->run();
                 break;
-            
+            case 'taskController':
+                require __DIR__.'/backend/controller/taskController.php';
+                $controller = new taskController();
+                $controller->run();
+                break;
             default:
                 echo '404 not found';
                 http_response_code(404);

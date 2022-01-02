@@ -26,48 +26,49 @@
                                 <th scope="col">Subject</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php
-                            foreach ($workspace->tasks as $task) {
-                            ?>
-                                <tr>
-                                    <th scope="row" class="text-center" style="width: 0;">
-                                        <input class="form-check-input check_inside_table" style=" position: relative;" type="checkbox" id="" value="option1">
-                                    </th>
-                                    <td><?php echo $task['taskDescription'] ?> </td>
-                                    <td><?php echo $task['dateTime'] ?></td>
-                                    <td><?php echo $task['priority'] ?></td>
-                                    <td><?php echo $task['subject'] ?></td>
-                                </tr>
-                            <?php
-                            }
-                            ?>
-
+                        <tbody id="taskResults">
+                                <?php
+                                foreach ($workspace->tasks as $task) {
+                                ?>
+                                    <tr>
+                                        <th scope="row" class="text-center" style="width: 0;">
+                                            <input class="form-check-input check_inside_table" style=" position: relative;" type="checkbox" id="" value="option1">
+                                        </th>
+                                        <td><?php echo $task['taskDescription'] ?> </td>
+                                        <td><?php echo $task['dateTime'] ?></td>
+                                        <td><?php echo $task['priority'] ?></td>
+                                        <td><?php echo $task['subject'] ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                        </tbody>
+                        <tfoot>
                             <tr>
                                 <th scope="row">
-                                    <button type="button" style="margin-top: 15px;" class="btn btn-sm btn-dark">Add</button>
+                                    <button type="button" style="margin-top: 15px;" id="addTask" class="btn btn-sm btn-dark">Add</button>
                                 </th>
                                 <td class="pt-3">
-                                    <input type="text" class="form-control input-sm" id="inputTaskDescription" placeholder="Task">
+                                    <input type="text" class="form-control input-sm" id="iptTaskDescription" placeholder="Task">
                                 </td>
                                 <td class="pt-3"> 
-                                    <input type="date" class="form-control input-sm" id="inputTaskDescription" placeholder="Task">
+                                    <input type="datetime-local" class="form-control input-sm" id="iptDate" placeholder="Date">
                                 </td>
                                 <td class="pt-3">
-                                    <select class="form-control input-sm" name="workspaces" id="workspaces"> 
-                                        <option value="">High</option>
-                                        <option value="">Medium</option>
-                                        <option value="">Low</option>
+                                    <select class="form-control input-sm" name="workspaces" id="sltPriority"> 
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
                                     </select>
                                 </td>
                                 <td class="pt-3">
-                                <select class="form-control input-sm" name="workspaces" id="workspaces"> 
+                                <select class="form-control input-sm" name="workspaces" id="sltSubject"> 
                                         <?php
                                         if ($workspace->subjects != null) {
                                             foreach ($workspace->subjects as $subject) {
                                             ?>
                                                 
-                                                <option><?php echo $subject['description'] ?> </option>
+                                                <option id="<?php echo $subject['id'] ?>"><?php echo $subject['description'] ?> </option>
                                                 
                                             <?php
                                             }
@@ -76,7 +77,7 @@
                                     </select>
                                 </td>
                             </tr>
-                        </tbody>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -90,12 +91,12 @@
                         <?php
                         if ($workspace->subjects != null) {
                             foreach ($workspace->subjects as $subject) {
-                                ?>
-                                    <tr>
-                                        <td><?php echo $subject['description'] ?> </td>
-                                    </tr>
-                                <?php
-                                }
+                            ?>
+                                <tr>
+                                    <td><?php echo $subject['description'] ?> </td>
+                                </tr>
+                            <?php
+                            }
                         }
                         ?> 
                         </tbody>
