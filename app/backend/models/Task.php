@@ -21,6 +21,9 @@ class Task {
         $this->subject = $subject;
     }
 
+    public function getId() {
+        return $this->id;
+    }
     public function getDescription() {
         return $this->description;
     }

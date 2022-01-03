@@ -2,6 +2,41 @@
 document.getElementById("addTask").onclick = addTask;
 document.getElementById("addSubject").onclick = addSubject;
 
+window.onload = function() {
+    addCheckboxListeners();
+  };
+
+function addCheckboxListeners(){
+    document.querySelectorAll("input[name=taskCheckbox]").forEach(taskCheckbox => {;
+        taskCheckbox.addEventListener('change', function() {
+        console.log("test");
+
+            if (this.checked) {
+                const taskId = this.id;
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "taskController", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onload = () => {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            let data = JSON.parse(xhr.response);
+                            const result = data['result'];
+
+                            if (result == true) {
+                                loadTasks();
+                            }
+                        }
+                    }
+                }
+
+
+                xhr.send(`action=completeTask&taskId=${taskId}`);
+            }
+        });
+    });
+}
+
 function addTask(){
     let task = document.getElementById("iptTaskDescription").value;
     let dateTime = document.getElementById("iptDate").value;
@@ -108,7 +143,7 @@ function loadTasks(){
                 data.forEach(task => {
                     html += `<tr>
                                 <th scope="row" class="text-center" style="width: 0;">
-                                    <input class="form-check-input check_inside_table" style=" position: relative;" type="checkbox" id="" value="${task.taskID}">
+                                    <input class="form-check-input check_inside_table" style=" position: relative;" type="checkbox" name="taskCheckbox" id="${task.taskID}">
                                 </th>
                                 <td>${task.taskDescription} </td>
                                 <td>${task.dateTime}</td>
@@ -118,6 +153,7 @@ function loadTasks(){
                 });
 
                 document.getElementById("taskResults").innerHTML = html;
+                addCheckboxListeners();
             }
         }
     }
@@ -125,3 +161,4 @@ function loadTasks(){
 
     xhr.send(`action=getTasks&workspace=${workspace}`);
 }
+

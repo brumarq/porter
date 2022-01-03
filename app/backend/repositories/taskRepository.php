@@ -22,7 +22,7 @@ class TaskRepository extends Repository
                                     FROM tasks
                                     LEFT JOIN subjects as sub
                                         ON tasks.fkSubject = sub.id
-                                    WHERE tasks.fkWorkspace=:workspaceID'
+                                    WHERE tasks.fkWorkspace=:workspaceID AND status="open"'
         );
         $tasksSql->execute(['workspaceID' => $selectedWorkspace->getId()]);
         if ($tasksSql->rowCount() > 0) {
@@ -52,5 +52,19 @@ class TaskRepository extends Repository
                              'fkWorkspace' => $workspace->getId(),
                              'fkSubject' =>  $subject->getId() != '' ? $subject->getId() : NULL
                             ]);
+    }
+
+    function completeTask($task)
+    {
+        require __DIR__ . '/../../config.php';
+
+        // Getting all the tasks of specific user
+        $tasksSql = $conn->prepare(
+            'UPDATE tasks
+            SET status = "closed"
+            WHERE id=:taskId;'
+        );
+        
+        return $tasksSql->execute([ 'taskId' => $task->getId()]);
     }
 }

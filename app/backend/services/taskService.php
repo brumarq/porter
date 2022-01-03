@@ -11,6 +11,11 @@ class TaskService {
         $repository = new TaskRepository();
         return $repository->addTask($task);  
     }
+
+    public function completeTask($task) {
+        $repository = new TaskRepository();
+        return $repository->completeTask($task);  
+    }
 }
 
 ?>

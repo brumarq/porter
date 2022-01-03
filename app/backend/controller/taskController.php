@@ -25,10 +25,41 @@ class taskController extends Controller
                 case 'getTasks':
                     $this->getTasks();
                     break;
+                case 'completeTask':
+                    $this->completeTask();
+                    break;
                 default:
                     # code...
                     break;
             }
+        }
+    }
+
+    function completeTask()
+    {
+
+        if (!empty($_SESSION['unique_id'])) {
+            $taskId =  $_POST['taskId'];
+
+            $response = new stdClass;
+
+            if (!empty($taskId)) {
+                $workspace =  new Workspace(null, null, null);
+                $subject = new Subject(null, null, $workspace);
+
+                $task = new Task($taskId, null, null, null, $workspace, $subject);
+
+                $taskService = new TaskService();
+                $response->result = $taskService->completeTask($task);
+            } else {
+                $response->result = "emptyFields";
+            }
+
+
+
+            require __DIR__ . "/../views/api/jsonOutput.php";
+        } else {
+            require __DIR__ . "/../views/login.php";
         }
     }
 
@@ -48,21 +79,17 @@ class taskController extends Controller
                 } else {
                     $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
                 }
-                
 
-                
                 $subject =  new Subject($_POST['subject'], null, $workspace);
                 $task = new Task(null, $task, $dateTime, $priority, $workspace, $subject);
-    
+
                 $taskService = new TaskService();
-    
-                
                 $response->result = $taskService->addTask($task);
-            }else {
+            } else {
                 $response->result = "emptyFields";
             }
 
-            
+
 
             require __DIR__ . "/../views/api/jsonOutput.php";
         } else {
