@@ -15,13 +15,13 @@ class TaskRepository extends Repository
         } else {
             $selectedWorkspace = $_SESSION["workspace"];
         }
-        
+
         // Getting all the tasks of specific user
         $tasksSql = $conn->prepare(
             'SELECT tasks.id as "taskID", taskDescription, dateTime, priority, sub.description as "subject"
                                     FROM tasks
                                     LEFT JOIN subjects as sub
-                                        ON tasks.fkSubject = sub.fkWorkspace
+                                        ON tasks.fkSubject = sub.id
                                     WHERE tasks.fkWorkspace=:workspaceID'
         );
         $tasksSql->execute(['workspaceID' => $selectedWorkspace->getId()]);
@@ -45,11 +45,12 @@ class TaskRepository extends Repository
         $workspace = $task->getWorkspace();
         $subject = $task->getSubject();
 
+
         return $tasksSql->execute([ 'taskDescription' => $task->getDescription(),
                              'dateTime' => $task->getDateTime(),
                              'priority' => $task->getPriority(),
                              'fkWorkspace' => $workspace->getId(),
-                             'fkSubject' => $subject->getId()
+                             'fkSubject' =>  $subject->getId() != '' ? $subject->getId() : NULL
                             ]);
     }
 }

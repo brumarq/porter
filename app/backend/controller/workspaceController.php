@@ -36,7 +36,7 @@ class workspaceController extends Controller{
             $workspaceObj = new Workspace($workspace->workspaces[0]["id"], $workspace->workspaces[0]["name"], $_SESSION['unique_id']);
 
             $workspace->tasks = $taskService->getTasks($workspaceObj);
-            $workspace->subjects = $subjectService->getSubjects($workspace);
+            $workspace->subjects = $subjectService->getSubjects($workspaceObj);
 
             require __DIR__ . "/../views/workplace.php";
         }else {

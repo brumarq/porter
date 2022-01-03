@@ -34,6 +34,11 @@ class Router {
                 $controller = new taskController();
                 $controller->run();
                 break;
+            case 'subjectController':
+                require __DIR__.'/backend/controller/subjectController.php';
+                $controller = new subjectController();
+                $controller->run();
+                break;
             default:
                 echo '404 not found';
                 http_response_code(404);

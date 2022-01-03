@@ -11,7 +11,7 @@ class SubjectRepository extends Repository
         $selectedWorkspace;
 
         if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
-            $selectedWorkspace = $workspace->workspaces[0];
+            $selectedWorkspace = $workspace;
         }else {
             $selectedWorkspace = $_SESSION["workspace"];
         }
@@ -21,11 +21,29 @@ class SubjectRepository extends Repository
                                     FROM subjects
                                     WHERE subjects.fkWorkspace=:workspaceID'
                                 );
-        $tasksSql->execute(['workspaceID' => $selectedWorkspace["id"]]);
+        $tasksSql->execute(['workspaceID' => $selectedWorkspace->getId()]);
         if ($tasksSql->rowCount() > 0) {
             return $tasksSql->fetchAll(PDO::FETCH_ASSOC);
         } else {
             return null;
         }
+    }
+
+    function addSubject($subject)
+    {
+        require __DIR__ . '/../../config.php';
+
+        // Getting all the tasks of specific user
+        $tasksSql = $conn->prepare(
+            'INSERT INTO subjects (description, fkWorkspace)
+            VALUES (:description, :workspaceID);'
+        );
+
+        $workspace = $subject->getWorkspace();
+        $name = $subject->getName();
+
+        return $tasksSql->execute([ 'workspaceID' => $workspace->getID(),
+                                    'description' => $name 
+                                ]);
     }
 }

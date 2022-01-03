@@ -6,6 +6,11 @@ class SubjectService {
         $repository = new SubjectRepository();
         return $repository->getSubjects($workspace);  
     }
+
+    public function addSubject($subject) {
+        $repository = new SubjectRepository();
+        return $repository->addSubject($subject);  
+    }
 }
 
 ?>

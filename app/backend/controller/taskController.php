@@ -11,11 +11,13 @@ require __DIR__ . '/../models/Subject.php';
 require __DIR__ . '/../models/Workspace.php';
 
 
-class taskController extends Controller{
+class taskController extends Controller
+{
 
-    public function run(){
-        
-        if(isset($_POST['action'])){
+    public function run()
+    {
+
+        if (isset($_POST['action'])) {
             switch ($_POST['action']) {
                 case 'addTask':
                     $this->addTask();
@@ -30,40 +32,50 @@ class taskController extends Controller{
         }
     }
 
-    function addTask() {
+    function addTask()
+    {
 
         if (!empty($_SESSION['unique_id'])) {
             $task =  $_POST['task'];
             $dateTime =  $_POST['dateTime'];
             $priority =  $_POST['priority'];
-            $subject =  new Subject($_POST['subject'], null, $_SESSION['unique_id']);
-
-            if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
-                $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
-            }else {
-                $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
-            }
-
-
-            $task = new Task(null, $task, $dateTime, $priority, $workspace, $subject);
-
-            $taskService = new TaskService();
 
             $response = new stdClass;
-            $response->result = $taskService->addTask($task);
+
+            if (!empty($task) && !empty($dateTime) && !empty($priority)) {
+                if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
+                    $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
+                } else {
+                    $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
+                }
+                
+
+                
+                $subject =  new Subject($_POST['subject'], null, $workspace);
+                $task = new Task(null, $task, $dateTime, $priority, $workspace, $subject);
+    
+                $taskService = new TaskService();
+    
+                
+                $response->result = $taskService->addTask($task);
+            }else {
+                $response->result = "emptyFields";
+            }
+
+            
 
             require __DIR__ . "/../views/api/jsonOutput.php";
-        }else {
+        } else {
             require __DIR__ . "/../views/login.php";
         }
     }
 
-    function getTasks() {
-
+    function getTasks()
+    {
         if (!empty($_SESSION['unique_id'])) {
             if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
                 $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
-            }else {
+            } else {
                 $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
             }
 
@@ -73,7 +85,7 @@ class taskController extends Controller{
             $response = $taskService->getTasks($workspace);
 
             require __DIR__ . "/../views/api/jsonOutput.php";
-        }else {
+        } else {
             require __DIR__ . "/../views/login.php";
         }
     }

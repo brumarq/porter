@@ -6,21 +6,21 @@ class Subject {
 
     protected $id;
     protected $name;
-    protected $user;
+    protected Workspace $workspace;
 
 
-    public function __construct($id, $name, $user) {
+    public function __construct($id, $name, $workspace) {
         $this->id = $id;
         $this->name = $name;
-        $this->user = $user;
+        $this->workspace = $workspace;
     }
 
     public function getId() {
         return $this->id;
     }
 
-    public function getUser() {
-        return $this->user;
+    public function getWorkspace() {
+        return $this->workspace;
     }
 
     public function getName() {
