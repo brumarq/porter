@@ -9,7 +9,7 @@ The goal is to have a home page with all the information needed and also make it
 (Optional) I would like to have a google calendar (Using google's API).
 
 ## Technologies
-- Frontend: HTML, CSS (pico.css), JavaScript
+- Frontend: HTML, CSS (Bootstrap), JavaScript
 - Backend: PHP, MySQL
 
 ## Usage
