@@ -1,6 +1,6 @@
 <?php require('templates/header.php'); ?>
 
-<main class="form-signup">
+<main class="form-signup text-center">
     <form class="signupForm" name="signup">
         <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
         <div class="col-12">
@@ -42,5 +42,7 @@
 </main>
 
 <script src="/js/signup.js"></script>
+<link rel="stylesheet" href="../css/login.css">
+<link rel="stylesheet" href="../css/main.css">
 
 <?php require('templates/footer.php'); ?>
