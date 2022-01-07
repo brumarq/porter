@@ -18,26 +18,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `porter`
+-- Database: "porter"
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subjects`
+-- Table structure for table "subjects"
 --
 
-CREATE TABLE `subjects` (
-  `id` int(11) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `fkWorkspace` int(11) NOT NULL
+CREATE TABLE "subjects" (
+  "id" int(11) NOT NULL,
+  "description" varchar(255) NOT NULL,
+  "fkWorkspace" int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `subjects`
+-- Dumping data for table "subjects"
 --
 
-INSERT INTO `subjects` (`id`, `description`, `fkWorkspace`) VALUES
+INSERT INTO "subjects" ("id", "description", "fkWorkspace") VALUES
 (1, 'Web Development', 1),
 (12, 'Test', 1),
 (13, 'test2', 1),
@@ -47,24 +47,24 @@ INSERT INTO `subjects` (`id`, `description`, `fkWorkspace`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tasks`
+-- Table structure for table "tasks"
 --
 
-CREATE TABLE `tasks` (
-  `id` int(11) NOT NULL,
-  `taskDescription` text NOT NULL,
-  `dateTime` datetime NOT NULL,
-  `priority` enum('High','Medium','Low') NOT NULL,
-  `fkWorkspace` int(11) NOT NULL,
-  `fkSubject` int(11) DEFAULT NULL,
-  `status` enum('open','closed') NOT NULL
+CREATE TABLE "tasks" (
+  "id" int(11) NOT NULL,
+  "taskDescription" text NOT NULL,
+  "dateTime" datetime NOT NULL,
+  "priority" enum('High','Medium','Low') NOT NULL,
+  "fkWorkspace" int(11) NOT NULL,
+  "fkSubject" int(11) DEFAULT NULL,
+  "status" enum('open','closed') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tasks`
+-- Dumping data for table "tasks"
 --
 
-INSERT INTO `tasks` (`id`, `taskDescription`, `dateTime`, `priority`, `fkWorkspace`, `fkSubject`, `status`) VALUES
+INSERT INTO "tasks" ("id", "taskDescription", "dateTime", "priority", "fkWorkspace", "fkSubject", "status") VALUES
 (13, 'dfsdfsd', '2022-01-06 01:56:00', 'High', 1, 1, 'closed'),
 (14, 'sfdsfdsf', '2022-01-27 02:03:00', 'High', 1, 1, 'closed'),
 (15, 'dfsdf', '2022-01-27 06:12:00', 'High', 1, 1, 'closed'),
@@ -86,22 +86,22 @@ INSERT INTO `tasks` (`id`, `taskDescription`, `dateTime`, `priority`, `fkWorkspa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table "users"
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `fName` varchar(256) NOT NULL,
-  `lName` varchar(256) NOT NULL,
-  `email` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL
+CREATE TABLE "users" (
+  "id" int(11) NOT NULL,
+  "fName" varchar(256) NOT NULL,
+  "lName" varchar(256) NOT NULL,
+  "email" varchar(256) NOT NULL,
+  "password" varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table "users"
 --
 
-INSERT INTO `users` (`id`, `fName`, `lName`, `email`, `password`) VALUES
+INSERT INTO "users" ("id", "fName", "lName", "email", "password") VALUES
 (1, 'Bruno', 'Coimbra Marques', 'brunocm@pm.me', 'test..123'),
 (2, 'Silvia', 'Almeida', 'silvia@gmail.com', 'test..123'),
 (3, 'ssdfds', 'fdsfsdfsd', 'fsdfsd@gmail.com', 'hjdshfjhsd');
@@ -109,20 +109,20 @@ INSERT INTO `users` (`id`, `fName`, `lName`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `workspaces`
+-- Table structure for table "workspaces"
 --
 
-CREATE TABLE `workspaces` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `fkuser` int(11) NOT NULL
+CREATE TABLE "workspaces" (
+  "id" int(11) NOT NULL,
+  "name" varchar(255) NOT NULL,
+  "fkuser" int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `workspaces`
+-- Dumping data for table "workspaces"
 --
 
-INSERT INTO `workspaces` (`id`, `name`, `fkuser`) VALUES
+INSERT INTO "workspaces" ("id", "name", "fkuser") VALUES
 (1, 'University', 1),
 (2, 'SLYGAD', 1);
 
@@ -131,83 +131,83 @@ INSERT INTO `workspaces` (`id`, `name`, `fkuser`) VALUES
 --
 
 --
--- Indexes for table `subjects`
+-- Indexes for table "subjects"
 --
-ALTER TABLE `subjects`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fkWorkspace` (`fkWorkspace`);
+ALTER TABLE "subjects"
+  ADD PRIMARY KEY ("id"),
+  ADD KEY "fkWorkspace" ("fkWorkspace");
 
 --
--- Indexes for table `tasks`
+-- Indexes for table "tasks"
 --
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fkSubject` (`fkSubject`) USING BTREE,
-  ADD KEY `fkWorkspace` (`fkWorkspace`) USING BTREE;
+ALTER TABLE "tasks"
+  ADD PRIMARY KEY ("id"),
+  ADD KEY "fkSubject" ("fkSubject") USING BTREE,
+  ADD KEY "fkWorkspace" ("fkWorkspace") USING BTREE;
 
 --
--- Indexes for table `users`
+-- Indexes for table "users"
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE "users"
+  ADD PRIMARY KEY ("id");
 
 --
--- Indexes for table `workspaces`
+-- Indexes for table "workspaces"
 --
-ALTER TABLE `workspaces`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fkuser` (`fkuser`);
+ALTER TABLE "workspaces"
+  ADD PRIMARY KEY ("id"),
+  ADD KEY "fkuser" ("fkuser");
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `subjects`
+-- AUTO_INCREMENT for table "subjects"
 --
-ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE "subjects"
+  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `tasks`
+-- AUTO_INCREMENT for table "tasks"
 --
-ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+ALTER TABLE "tasks"
+  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table "users"
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE "users"
+  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `workspaces`
+-- AUTO_INCREMENT for table "workspaces"
 --
-ALTER TABLE `workspaces`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE "workspaces"
+  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `subjects`
+-- Constraints for table "subjects"
 --
-ALTER TABLE `subjects`
-  ADD CONSTRAINT `subjects_ibfk_1` FOREIGN KEY (`fkWorkspace`) REFERENCES `workspaces` (`id`);
+ALTER TABLE "subjects"
+  ADD CONSTRAINT "subjects_ibfk_1" FOREIGN KEY ("fkWorkspace") REFERENCES "workspaces" ("id");
 
 --
--- Constraints for table `tasks`
+-- Constraints for table "tasks"
 --
-ALTER TABLE `tasks`
-  ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`fkWorkspace`) REFERENCES `workspaces` (`id`),
-  ADD CONSTRAINT `tasks_ibfk_3` FOREIGN KEY (`fkSubject`) REFERENCES `subjects` (`id`);
+ALTER TABLE "tasks"
+  ADD CONSTRAINT "tasks_ibfk_2" FOREIGN KEY ("fkWorkspace") REFERENCES "workspaces" ("id"),
+  ADD CONSTRAINT "tasks_ibfk_3" FOREIGN KEY ("fkSubject") REFERENCES "subjects" ("id");
 
 --
--- Constraints for table `workspaces`
+-- Constraints for table "workspaces"
 --
-ALTER TABLE `workspaces`
-  ADD CONSTRAINT `workspaces_ibfk_1` FOREIGN KEY (`fkuser`) REFERENCES `users` (`id`);
+ALTER TABLE "workspaces"
+  ADD CONSTRAINT "workspaces_ibfk_1" FOREIGN KEY ("fkuser") REFERENCES "users" ("id");
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
