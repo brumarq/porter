@@ -1,70 +1,43 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: mysql
--- Generation Time: Jan 07, 2022 at 06:14 PM
--- Server version: 10.6.5-MariaDB-1:10.6.5+maria~focal
--- PHP Version: 7.4.25
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+CREATE TABLE subjects (
+  id int NOT NULL,
+  description varchar(255) NOT NULL,
+  fkWorkspace int NOT NULL
+) ;
 
 --
--- Database: "porter"
+-- SQLINES DEMO *** table "subjects"
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table "subjects"
---
-
-CREATE TABLE "subjects" (
-  "id" int NOT NULL,
-  "description" varchar(255) NOT NULL,
-  "fkWorkspace" int NOT NULL
-);
-
---
--- Dumping data for table "subjects"
---
-
-INSERT INTO "subjects" ("id", "description", "fkWorkspace") VALUES
+INSERT INTO subjects (id, description, fkWorkspace) VALUES
 (1, 'Web Development', 1),
 (12, 'Test', 1),
 (13, 'test2', 1),
 (14, 'Kak', 1),
 (15, 'Giftcard project', 2);
 
--- --------------------------------------------------------
+-- SQLINES DEMO *** ---------------------------------------
 
 --
--- Table structure for table "tasks"
+-- SQLINES DEMO *** or table "tasks"
 --
 
-CREATE TABLE "tasks" (
-  "id" int NOT NULL,
-  "taskDescription" text NOT NULL,
-  "dateTime" datetime NOT NULL,
-  "priority" enum('High','Medium','Low') NOT NULL,
-  "fkWorkspace" int NOT NULL,
-  "fkSubject" int DEFAULT NULL,
-  "status" enum('open','closed') NOT NULL
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE tasks (
+  id int NOT NULL,
+  taskDescription text NOT NULL,
+  dateTime timestamp(0) NOT NULL,
+  priority enum('High','Medium','Low') NOT NULL,
+  fkWorkspace int NOT NULL,
+  fkSubject int DEFAULT NULL,
+  status enum('open','closed') NOT NULL
 );
 
 --
--- Dumping data for table "tasks"
+-- SQLINES DEMO *** table "tasks"
 --
 
-INSERT INTO "tasks" ("id", "taskDescription", "dateTime", "priority", "fkWorkspace", "fkSubject", "status") VALUES
+INSERT INTO tasks (id, taskDescription, dateTime, priority, fkWorkspace, fkSubject, status) VALUES
 (13, 'dfsdfsd', '2022-01-06 01:56:00', 'High', 1, 1, 'closed'),
 (14, 'sfdsfdsf', '2022-01-27 02:03:00', 'High', 1, 1, 'closed'),
 (15, 'dfsdf', '2022-01-27 06:12:00', 'High', 1, 1, 'closed'),
@@ -83,133 +56,116 @@ INSERT INTO "tasks" ("id", "taskDescription", "dateTime", "priority", "fkWorkspa
 (28, 'dsfsdfsdf', '2022-01-13 12:49:00', 'High', 2, 15, 'open'),
 (29, 'sdfddfsfsd', '2022-01-27 17:08:00', 'High', 1, 13, 'open');
 
--- --------------------------------------------------------
+-- SQLINES DEMO *** ---------------------------------------
 
 --
--- Table structure for table "users"
+-- SQLINES DEMO *** or table "users"
 --
 
-CREATE TABLE "users" (
-  "id" int NOT NULL,
-  "fName" varchar(256) NOT NULL,
-  "lName" varchar(256) NOT NULL,
-  "email" varchar(256) NOT NULL,
-  "password" varchar(256) NOT NULL
-);
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE users (
+  id int NOT NULL,
+  fName varchar(256) NOT NULL,
+  lName varchar(256) NOT NULL,
+  email varchar(256) NOT NULL,
+  password varchar(256) NOT NULL
+) ;
 
 --
--- Dumping data for table "users"
+-- SQLINES DEMO *** table "users"
 --
 
-INSERT INTO "users" ("id", "fName", "lName", "email", "password") VALUES
+INSERT INTO users (id, fName, lName, email, password) VALUES
 (1, 'Bruno', 'Coimbra Marques', 'brunocm@pm.me', 'test..123'),
 (2, 'Silvia', 'Almeida', 'silvia@gmail.com', 'test..123'),
 (3, 'ssdfds', 'fdsfsdfsd', 'fsdfsd@gmail.com', 'hjdshfjhsd');
 
--- --------------------------------------------------------
+-- SQLINES DEMO *** ---------------------------------------
 
 --
--- Table structure for table "workspaces"
+-- SQLINES DEMO *** or table "workspaces"
 --
 
-CREATE TABLE "workspaces" (
-  "id" int NOT NULL,
-  "name" varchar(255) NOT NULL,
-  "fkuser" int NOT NULL
-);
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE workspaces (
+  id int NOT NULL,
+  name varchar(255) NOT NULL,
+  fkuser int NOT NULL
+) ;
 
 --
--- Dumping data for table "workspaces"
+-- SQLINES DEMO *** table "workspaces"
 --
 
-INSERT INTO "workspaces" ("id", "name", "fkuser") VALUES
+INSERT INTO workspaces (id, name, fkuser) VALUES
 (1, 'University', 1),
 (2, 'SLYGAD', 1);
 
 --
--- Indexes for dumped tables
+-- SQLINES DEMO *** d tables
 --
 
 --
--- Indexes for table "subjects"
+-- SQLINES DEMO ***  "subjects"
 --
-ALTER TABLE "subjects"
-  ADD PRIMARY KEY ("id"),
-  ADD KEY "fkWorkspace" ("fkWorkspace");
+ALTER TABLE subjects
+  ADD PRIMARY KEY (id),
+  ADD KEY "fkWorkspace" (fkWorkspace);
 
 --
--- Indexes for table "tasks"
+-- SQLINES DEMO ***  "tasks"
 --
-ALTER TABLE "tasks"
-  ADD PRIMARY KEY ("id"),
-  ADD KEY "fkSubject" ("fkSubject"),
-  ADD KEY "fkWorkspace" ("fkWorkspace");
+ALTER TABLE tasks
+  ADD PRIMARY KEY (id),
+  ADD KEY "fkSubject" (fkSubject),
+  ADD KEY "fkWorkspace" (fkWorkspace) ;
 
 --
--- Indexes for table "users"
+-- SQLINES DEMO ***  "users"
 --
-ALTER TABLE "users"
-  ADD PRIMARY KEY ("id");
+ALTER TABLE users
+  ADD PRIMARY KEY (id);
 
 --
--- Indexes for table "workspaces"
+-- SQLINES DEMO ***  "workspaces"
 --
-ALTER TABLE "workspaces"
-  ADD PRIMARY KEY ("id"),
-  ADD KEY "fkuser" ("fkuser");
+ALTER TABLE workspaces
+  ADD PRIMARY KEY (id),
+  ADD KEY "fkuser" (fkuser);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- SQLINES DEMO *** r dumped tables
 --
 
---
--- AUTO_INCREMENT for table "subjects"
---
-ALTER TABLE "subjects"
-  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table "tasks"
---
-ALTER TABLE "tasks"
-  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT for table "users"
---
-ALTER TABLE "users"
-  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table "workspaces"
---
-ALTER TABLE "workspaces"
-  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
+-- SQLINES DEMO *** r table "workspaces"
 --
 
 --
--- Constraints for table "subjects"
+-- SQLINES DEMO *** umped tables
 --
-ALTER TABLE "subjects"
-  ADD CONSTRAINT "subjects_ibfk_1" FOREIGN KEY ("fkWorkspace") REFERENCES "workspaces" ("id");
 
 --
--- Constraints for table "tasks"
+-- SQLINES DEMO *** able "subjects"
 --
-ALTER TABLE "tasks"
-  ADD CONSTRAINT "tasks_ibfk_2" FOREIGN KEY ("fkWorkspace") REFERENCES "workspaces" ("id"),
-  ADD CONSTRAINT "tasks_ibfk_3" FOREIGN KEY ("fkSubject") REFERENCES "subjects" ("id");
+ALTER TABLE subjects
+  ADD CONSTRAINT subjects_ibfk_1 FOREIGN KEY (fkWorkspace) REFERENCES workspaces (id);
 
 --
--- Constraints for table "workspaces"
+-- SQLINES DEMO *** able "tasks"
 --
-ALTER TABLE "workspaces"
-  ADD CONSTRAINT "workspaces_ibfk_1" FOREIGN KEY ("fkuser") REFERENCES "users" ("id");
+ALTER TABLE tasks
+  ADD CONSTRAINT tasks_ibfk_2 FOREIGN KEY (fkWorkspace) REFERENCES workspaces (id),
+  ADD CONSTRAINT tasks_ibfk_3 FOREIGN KEY (fkSubject) REFERENCES "subjects" (id);
+
+--
+-- SQLINES DEMO *** able "workspaces"
+--
+ALTER TABLE workspaces
+  ADD CONSTRAINT workspaces_ibfk_1 FOREIGN KEY (fkuser) REFERENCES users (id);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/* SQLINES DEMO *** ER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/* SQLINES DEMO *** ER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/* SQLINES DEMO *** ON_CONNECTION=@OLD_COLLATION_CONNECTION */;
