@@ -1,4 +1,5 @@
 CREATE TYPE prio AS ENUM ('High', 'Medium', 'Low');
+CREATE TYPE stat AS ENUM ('open', 'closed');
 
 CREATE TABLE subjects (
   id int NOT NULL,
@@ -21,7 +22,7 @@ CREATE TABLE tasks (
   priority prio NOT NULL,
   fkWorkspace int NOT NULL,
   fkSubject int DEFAULT NULL,
-  status enum('open','closed') NOT NULL
+  status stat NOT NULL
 );
 
 -- SQLINES DEMO *** ---------------------------------------
