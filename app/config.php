@@ -1,5 +1,5 @@
 <?php
-    if (getenv('DATABASE_URL') != "") {
+    if (getenv('CLEARDB_DATABASE_URL') != "") {
         $herokuDb = parse_url(getenv('CLEARDB_DATABASE_URL'));
 
         $type = 'mysql';
