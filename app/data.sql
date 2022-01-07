@@ -142,8 +142,8 @@ ALTER TABLE "subjects"
 --
 ALTER TABLE "tasks"
   ADD PRIMARY KEY ("id"),
-  ADD KEY "fkSubject" ("fkSubject") USING BTREE,
-  ADD KEY "fkWorkspace" ("fkWorkspace") USING BTREE;
+  ADD KEY "fkSubject" ("fkSubject"),
+  ADD KEY "fkWorkspace" ("fkWorkspace");
 
 --
 -- Indexes for table "users"
