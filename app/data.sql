@@ -1,3 +1,4 @@
+CREATE TYPE prio AS ENUM ('High', 'Medium', 'Low');
 
 CREATE TABLE subjects (
   id int NOT NULL,
@@ -5,16 +6,6 @@ CREATE TABLE subjects (
   fkWorkspace int NOT NULL
 ) ;
 
---
--- SQLINES DEMO *** table "subjects"
---
-
-INSERT INTO subjects (id, description, fkWorkspace) VALUES
-(1, 'Web Development', 1),
-(12, 'Test', 1),
-(13, 'test2', 1),
-(14, 'Kak', 1),
-(15, 'Giftcard project', 2);
 
 -- SQLINES DEMO *** ---------------------------------------
 
@@ -27,34 +18,11 @@ CREATE TABLE tasks (
   id int NOT NULL,
   taskDescription text NOT NULL,
   dateTime timestamp(0) NOT NULL,
-  priority enum('High','Medium','Low') NOT NULL,
+  priority prio NOT NULL,
   fkWorkspace int NOT NULL,
   fkSubject int DEFAULT NULL,
   status enum('open','closed') NOT NULL
 );
-
---
--- SQLINES DEMO *** table "tasks"
---
-
-INSERT INTO tasks (id, taskDescription, dateTime, priority, fkWorkspace, fkSubject, status) VALUES
-(13, 'dfsdfsd', '2022-01-06 01:56:00', 'High', 1, 1, 'closed'),
-(14, 'sfdsfdsf', '2022-01-27 02:03:00', 'High', 1, 1, 'closed'),
-(15, 'dfsdf', '2022-01-27 06:12:00', 'High', 1, 1, 'closed'),
-(16, 'sdfdsfds', '2022-01-14 05:16:00', 'High', 1, 1, 'open'),
-(17, 'dsfsdf', '2022-01-20 17:58:00', 'High', 1, 1, 'closed'),
-(18, 'sdsds', '2022-01-15 18:06:00', 'High', 1, NULL, 'closed'),
-(19, 'sdsds', '2022-01-15 18:06:00', 'High', 1, NULL, 'closed'),
-(20, 'sadsad', '2021-12-30 19:51:00', 'High', 1, 1, 'closed'),
-(21, 'sadsad', '2021-12-30 19:51:00', 'High', 1, 13, 'closed'),
-(22, 'Vaccum Floor', '2022-01-12 23:00:00', 'Low', 1, 12, 'closed'),
-(23, 'Vaccum Floor', '2022-01-12 23:00:00', 'Low', 1, NULL, 'closed'),
-(24, 'Vaccum Floor', '2022-01-12 23:00:00', 'Low', 1, NULL, 'closed'),
-(25, 'Vaccum Floor', '2022-01-12 23:00:00', 'Low', 1, NULL, 'closed'),
-(26, 'dfdfdfd', '2022-01-14 12:29:00', 'High', 1, NULL, 'open'),
-(27, 'dsfsdfsdf', '2022-01-13 12:49:00', 'High', 2, NULL, 'open'),
-(28, 'dsfsdfsdf', '2022-01-13 12:49:00', 'High', 2, 15, 'open'),
-(29, 'sdfddfsfsd', '2022-01-27 17:08:00', 'High', 1, 13, 'open');
 
 -- SQLINES DEMO *** ---------------------------------------
 
