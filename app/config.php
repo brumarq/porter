@@ -6,7 +6,7 @@
         $servername = $herokuDb['host'];
         $dbusername = $herokuDb['user'];
         $dbpassword = $herokuDb['pass'];
-        $databasename = substr($url["path"], 1);
+        $databasename = substr($herokuDb["path"], 1);
         
     }else {
         
