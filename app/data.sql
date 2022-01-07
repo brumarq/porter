@@ -31,7 +31,7 @@ CREATE TABLE "subjects" (
   "id" int NOT NULL,
   "description" varchar(255) NOT NULL,
   "fkWorkspace" int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
 --
 -- Dumping data for table "subjects"
@@ -58,7 +58,7 @@ CREATE TABLE "tasks" (
   "fkWorkspace" int NOT NULL,
   "fkSubject" int DEFAULT NULL,
   "status" enum('open','closed') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
 --
 -- Dumping data for table "tasks"
@@ -95,7 +95,7 @@ CREATE TABLE "users" (
   "lName" varchar(256) NOT NULL,
   "email" varchar(256) NOT NULL,
   "password" varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
 --
 -- Dumping data for table "users"
@@ -116,7 +116,7 @@ CREATE TABLE "workspaces" (
   "id" int NOT NULL,
   "name" varchar(255) NOT NULL,
   "fkuser" int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
 --
 -- Dumping data for table "workspaces"
