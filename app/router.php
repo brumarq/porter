@@ -39,6 +39,9 @@ class Router {
                 $controller = new subjectController();
                 $controller->run();
                 break;
+            case 'initdb':
+                require __DIR__.'/initdb.php';
+                break;
             default:
                 echo '404 not found';
                 http_response_code(404);
