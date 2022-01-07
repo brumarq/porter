@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE "subjects" (
-  "id" int(11) NOT NULL,
+  "id" int NOT NULL,
   "description" varchar(255) NOT NULL,
-  "fkWorkspace" int(11) NOT NULL
+  "fkWorkspace" int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -51,12 +51,12 @@ INSERT INTO "subjects" ("id", "description", "fkWorkspace") VALUES
 --
 
 CREATE TABLE "tasks" (
-  "id" int(11) NOT NULL,
+  "id" int NOT NULL,
   "taskDescription" text NOT NULL,
   "dateTime" datetime NOT NULL,
   "priority" enum('High','Medium','Low') NOT NULL,
-  "fkWorkspace" int(11) NOT NULL,
-  "fkSubject" int(11) DEFAULT NULL,
+  "fkWorkspace" int NOT NULL,
+  "fkSubject" int DEFAULT NULL,
   "status" enum('open','closed') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -90,7 +90,7 @@ INSERT INTO "tasks" ("id", "taskDescription", "dateTime", "priority", "fkWorkspa
 --
 
 CREATE TABLE "users" (
-  "id" int(11) NOT NULL,
+  "id" int NOT NULL,
   "fName" varchar(256) NOT NULL,
   "lName" varchar(256) NOT NULL,
   "email" varchar(256) NOT NULL,
@@ -113,9 +113,9 @@ INSERT INTO "users" ("id", "fName", "lName", "email", "password") VALUES
 --
 
 CREATE TABLE "workspaces" (
-  "id" int(11) NOT NULL,
+  "id" int NOT NULL,
   "name" varchar(255) NOT NULL,
-  "fkuser" int(11) NOT NULL
+  "fkuser" int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -166,25 +166,25 @@ ALTER TABLE "workspaces"
 -- AUTO_INCREMENT for table "subjects"
 --
 ALTER TABLE "subjects"
-  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table "tasks"
 --
 ALTER TABLE "tasks"
-  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table "users"
 --
 ALTER TABLE "users"
-  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table "workspaces"
 --
 ALTER TABLE "workspaces"
-  MODIFY "id" int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY "id" int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
