@@ -28,7 +28,7 @@
                                     <?php
                                     foreach ($workspace->workspaces as $selectedWorkspace) {
                                     ?>
-                                        <option id="<?php echo $selectedWorkspace['id'] ?> ">
+                                        <option value="<?php echo $selectedWorkspace['id'] ?> ">
                                             <?php echo $selectedWorkspace['name'] ?>
                                         </option>
                                     <?php

@@ -3,18 +3,9 @@ require_once __DIR__ . '/repository.php';
 
 class TaskRepository extends Repository
 {
-    function getTasks($workspace)
+    function getTasks($selectedWorkspace)
     {
         require __DIR__ . '/../../config.php';
-
-        // Get selected workspace
-        $selectedWorkspace;
-
-        if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
-            $selectedWorkspace = $workspace;
-        } else {
-            $selectedWorkspace = $_SESSION["workspace"];
-        }
 
         // Getting all the tasks of specific user
         $tasksSql = $conn->prepare(

@@ -3,18 +3,9 @@ require_once __DIR__ . '/repository.php';
 
 class SubjectRepository extends Repository
 {
-    function getSubjects($workspace)
+    function getSubjects($selectedWorkspace)
     {
         require __DIR__ . '/../../config.php';
-
-        // Get selected workspace
-        $selectedWorkspace;
-
-        if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
-            $selectedWorkspace = $workspace;
-        }else {
-            $selectedWorkspace = $_SESSION["workspace"];
-        }
 
         // Getting all the subjects of specific workspace
         $tasksSql = $conn->prepare('SELECT id, description
