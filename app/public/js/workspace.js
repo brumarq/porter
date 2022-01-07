@@ -157,7 +157,7 @@ function loadTasks(){
                                     <td>${task.taskDescription} </td>
                                     <td>${task.dateTime}</td>
                                     <td>${task.priority}</td>
-                                    <td>${task.subject}</td>
+                                    <td>${task.subject == null ? "": task.subject }</td>
                                 </tr>`
                     });
     

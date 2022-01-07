@@ -28,6 +28,7 @@ class workspaceController extends Controller{
         $workspace = new stdClass;
         if (!empty($_SESSION['unique_id'])) {
             $userID =  $_SESSION['unique_id'];
+
             $workspaceService = new WorkspaceService();
             $taskService = new TaskService();
             $subjectService = new SubjectService();
@@ -36,11 +37,11 @@ class workspaceController extends Controller{
 
             if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
                 $workspaceObj = new Workspace($workspace->workspaces[0]["id"], $workspace->workspaces[0]["name"], $_SESSION['unique_id']);
-                $_SESSION["workspace"] = $workspaceObj;
+                $_SESSION["workspace"] = $workspaceObj->getId();
             } else {
                 $workspaceObj =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
             }
-            
+
             $workspace->tasks = $taskService->getTasks($workspaceObj);
             $workspace->subjects = $subjectService->getSubjects($workspaceObj);
 

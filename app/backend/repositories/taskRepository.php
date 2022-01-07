@@ -36,7 +36,6 @@ class TaskRepository extends Repository
         $workspace = $task->getWorkspace();
         $subject = $task->getSubject();
 
-
         return $tasksSql->execute([ 'taskDescription' => $task->getDescription(),
                              'dateTime' => $task->getDateTime(),
                              'priority' => $task->getPriority(),

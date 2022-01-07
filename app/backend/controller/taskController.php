@@ -74,11 +74,12 @@ class taskController extends Controller
             $response = new stdClass;
 
             if (!empty($task) && !empty($dateTime) && !empty($priority)) {
-                if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
-                    $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
-                } else {
-                    $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
+
+                if (array_key_exists("workspace", $_POST) || $_POST['workspace'] != null) {
+                    $_SESSION["workspace"] = $_POST['workspace'];
                 }
+
+                $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
 
                 $subject =  new Subject($_POST['subject'], null, $workspace);
                 $task = new Task(null, $task, $dateTime, $priority, $workspace, $subject);
@@ -100,10 +101,13 @@ class taskController extends Controller
     function getTasks()
     {
         if (!empty($_SESSION['unique_id'])) {
-            
-            $_SESSION["workspace"] = $_POST['workspace'];
-            $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
         
+
+            if (array_key_exists("workspace", $_POST) || $_POST['workspace'] != null) {
+                $_SESSION["workspace"] = $_POST['workspace'];
+            }
+
+            $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
 
             $taskService = new TaskService();
 

@@ -1,5 +1,4 @@
 <?php require('templates/header.php'); ?>
-
 <div class="container-fluid" style="margin-top: 100px;">
     <div class="row">
         <div class="col-8">
@@ -114,26 +113,6 @@
                             </tr>
                         </tfoot>
                     </table>
-                </div>
-            </div>
-
-            <div class="row mt-5">
-                <h2>Habbit Tracker</h2>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-sm">
-                        <tbody>
-
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 float-right">
-                    <button type="button" class="btn btn-sm btn-dark">Add</button>
-                    <button type="button" class="btn btn-sm btn-dark float-right">Delete</button>
                 </div>
             </div>
         </div>

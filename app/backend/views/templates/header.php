@@ -28,7 +28,7 @@
                                     <?php
                                     foreach ($workspace->workspaces as $selectedWorkspace) {
                                     ?>
-                                        <option value="<?php echo $selectedWorkspace['id'] ?> ">
+                                        <option value="<?php echo $selectedWorkspace['id'] ?>" <?php if($_SESSION['workspace'] == $selectedWorkspace['id']) echo"selected" ?>>
                                             <?php echo $selectedWorkspace['name'] ?>
                                         </option>
                                     <?php
