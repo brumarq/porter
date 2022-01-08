@@ -15,9 +15,8 @@ signupButton.onclick = ()=>{
                 let data = JSON.parse(xhr.response);
                 const result = data['message'];
                 
-                if (result == "success") {
-                    //document.location.href = "workspace";
-                    document.getElementById("errorMessage").innerHTML = "";
+                if (result == "userAdded") {
+                    document.location.href = "workspace";
                 } else  {
                     document.getElementById("errorMessage").innerHTML = result;
                 }

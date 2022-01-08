@@ -1,5 +1,5 @@
 <?php require('templates/header.php'); ?>
-<div class="container-fluid" style="margin-top: 100px;">
+<div class="container-fluid" style="margin-top: 100px;" hidden>
     <div class="row">
         <div class="col-8">
             <div class="row">
@@ -118,6 +118,15 @@
         </div>
     </div>
 </div>
+<main class="form-signin text-center" style="margin-top: 150px;">
+    <form class="loginForm" name="login">
+        <h1>Create your first Workspace!</h1>
+        <p>A workspace can contain all your tasks and personal notes. You can create several workspaces depending on your needs! <br> Let's create the first one:</p>
+        <input type="text" class=" form-control input" id="iptTaskDescription" placeholder="Workspace Name">
+        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Create!</button>
+    </form>
+</main>
+
 <script src="/js/workspace.js"></script>
 <link rel="stylesheet" href="../css/workspace.css">
 

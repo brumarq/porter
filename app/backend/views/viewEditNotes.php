@@ -50,7 +50,6 @@
         <div class="row">
             <textarea class="form-control" id="markupText" rows="100">
 <?php echo $note[0]["textMarkup"] ?>
-
             </textarea>
         </div>
         <button style="position: fixed; bottom:10px; right:10px;" type="button" onclick="saveChanges(this);" class="btn btn-dark">Save Changes</button>

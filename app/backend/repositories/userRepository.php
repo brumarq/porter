@@ -40,11 +40,15 @@ class UserRepository extends Repository
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $stmt = $conn->prepare('INSERT INTO users (fName, lName, email, password)
-                                        VALUES (:firstName, :lastName, :email, :password); '
+                                        VALUES (:firstName, :lastName, :email, :password);
+                                        SELECT LAST_INSERT_ID() as userId;'
                                     );
                 $stmt->execute(['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password]);
+                
 
                 if ($stmt->rowCount() > 0) {
+                    $userId = $conn->lastInsertId();
+                    $_SESSION['unique_id'] = $userId;
                     return "userAdded";
                 }
             } catch (PDOException $e) {
