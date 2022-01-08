@@ -40,6 +40,16 @@
                             ?>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <span class="nav-link"> | </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/workspace">Workspace</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/workspace/notes">Notes</a>
+                    </li>
                 </ul>
             </div>
         </nav>

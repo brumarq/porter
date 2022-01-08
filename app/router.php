@@ -19,6 +19,23 @@ class Router {
                 $_POST['action'] = "loadWorkspace";
                 $controller->run();
                 break;
+            case 'workspace/notes':
+                require __DIR__.'/backend/controller/noteController.php';
+                $controller = new noteController();
+                $_POST['action'] = "loadNotes";
+                $controller->run();
+                break;
+            case 'workspace/notes/viewEdit':
+                require __DIR__.'/backend/controller/noteController.php';
+                $controller = new noteController();
+                $_POST['action'] = "getNote";
+                $controller->run();
+                break;
+            case 'workspace/notes/notesController':
+                require __DIR__.'/backend/controller/noteController.php';
+                $controller = new noteController();
+                $controller->run();
+                break;
             case 'userController':
                 require __DIR__.'/backend/controller/userController.php';
                 $controller = new userController();
