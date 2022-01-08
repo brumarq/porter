@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/remarkable/1.7.1/remarkable.min.js"></script>
     <title>Porter</title>
 </head>
 
@@ -23,7 +23,7 @@
     </header>
     <div class="container" id="viewNote" style="margin-top: 100px;">
         <div class="row mb-3">
-            <a href="/workspace/notes/" type="button"  class="btn btn-sm btn-outline-dark">Back</a>
+            <a href="/workspace/notes/" type="button" class="btn btn-sm btn-outline-dark">Back</a>
         </div>
         <div class="row">
             <h2 class=" w-100">
@@ -37,7 +37,7 @@
         <div class="row  float-right">
             <button type="button" onclick="showEditWindow(this);" class="btn btn-dark">Edit</button>
         </div>
-        <div id="htmlText" class="row">
+        <div id="htmlText" class="row" style="display: contents;">
             <?php echo $note[0]["textHtml"] ?>
         </div>
     </div>
