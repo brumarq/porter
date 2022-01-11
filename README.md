@@ -6,8 +6,6 @@ During my studies I have had a hard time keeping all my notes, assignments, task
 
 The goal is to have a home page with all the information needed and also make it look very minimalist and simple so it is not overwhelming. First, we can create different users with their own workspaces. I want to have the option to store all my notes that are related to different projects/courses/subjects. The note taking should be done in markup language and then transform it into plain web text. In the home page there should also be a list with all my deadlines, that are obviously also related to the different  projects/courses/subjects. I want to have a to-do list in which I can add tasks that I have to do throughout the day, they do not have to be related to anything, but it should be possible to do so. 
 
-(Optional) I would like to have a google calendar (Using google's API).
-
 ## Technologies
 - Frontend: HTML, CSS (Bootstrap), JavaScript
 - Backend: PHP, MySQL
