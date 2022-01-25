@@ -16,7 +16,9 @@ class workspaceController extends Controller{
                 case 'loadWorkspace':
                     $this->loadWorkspace();
                     break;
-                
+                case 'addWorkspace':
+                    $this->addWorkspace();
+                    break;
                 default:
                     # code...
                     break;
@@ -49,6 +51,30 @@ class workspaceController extends Controller{
 
             require __DIR__ . "/../views/workplace.php";
         }else {
+            require __DIR__ . "/../views/login.php";
+        }
+    }
+
+    public function addWorkspace(){
+        if (!empty($_SESSION['unique_id'])) {
+            $response = new stdClass;
+
+            if (!empty($_POST['name'])) {
+
+                $workspace =  new Workspace("", $_POST['name'], $_SESSION['unique_id']);
+                
+                $workspaceService = new WorkspaceService();
+    
+                
+                $response->result = $workspaceService->addWorkspace($workspace);
+            }else {
+                $response->result = "emptyFields";
+            }
+
+            
+
+            require __DIR__ . "/../views/api/jsonOutput.php";
+        } else {
             require __DIR__ . "/../views/login.php";
         }
     }

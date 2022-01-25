@@ -25,4 +25,19 @@ class WorkspaceRepository extends Repository
             echo $e;
         }
     }
+
+    function addWorkspace($workspace){
+        require __DIR__ . '/../../config.php';
+
+        $workspacesSql = $conn->prepare(
+            'INSERT INTO workspaces (name, fkuser)
+            VALUES (:name, :fkuser);'
+        );
+
+        print_r($workspace->getId()); 
+
+        return $workspacesSql->execute([ 'name' => $workspace->getName(),
+                                         'fkuser' => $workspace->getUser()
+                                        ]);
+    }
 }
