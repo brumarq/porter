@@ -69,7 +69,7 @@ class NoteRepository extends Repository
 
         return $tasksSql->execute([ 'workspaceID' => $workspace->getID(),
                                     'title' => $title,
-                                    'created' => date("Y-d-m")
+                                    'created' => date('Y-m-d H:i:s')
                                 ]);
     }
 }

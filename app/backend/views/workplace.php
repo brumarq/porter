@@ -27,18 +27,20 @@
                         </thead>
                         <tbody id="taskResults">
                             <?php
-                            foreach ($workspace->tasks as $task) {
-                            ?>
-                                <tr>
-                                    <th scope="row" class="text-center" style="width: 0;">
-                                        <input class="form-check-input check_inside_table" style=" position: relative;" name="taskCheckbox" type="checkbox" id="<?php echo $task['taskID'] ?>">
-                                    </th>
-                                    <td><?php echo $task['taskDescription'] ?> </td>
-                                    <td><?php echo $task['dateTime'] ?></td>
-                                    <td><?php echo $task['priority'] ?></td>
-                                    <td><?php echo $task['subject'] != 'null' ? $task['subject'] : '' ?></td>
-                                </tr>
-                            <?php
+                            if ($workspace->tasks != null) {
+                                foreach ($workspace->tasks as $task) {
+                                ?>
+                                    <tr>
+                                        <th scope="row" class="text-center" style="width: 0;">
+                                            <input class="form-check-input check_inside_table" style=" position: relative;" name="taskCheckbox" type="checkbox" id="<?php echo $task['taskID'] ?>">
+                                        </th>
+                                        <td><?php echo $task['taskDescription'] ?> </td>
+                                        <td><?php echo $task['dateTime'] ?></td>
+                                        <td><?php echo $task['priority'] ?></td>
+                                        <td><?php echo $task['subject'] != 'null' ? $task['subject'] : '' ?></td>
+                                    </tr>
+                                <?php
+                                }
                             }
                             ?>
                         </tbody>

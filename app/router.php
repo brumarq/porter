@@ -2,7 +2,6 @@
 session_start();
 class Router {
     public function route($url){
-        
         switch ($url) {
             case '':
             case 'login':
@@ -29,6 +28,11 @@ class Router {
                 require __DIR__.'/backend/controller/noteController.php';
                 $controller = new noteController();
                 $_POST['action'] = "getNote";
+                $controller->run();
+                break;
+            case 'workspace/notesController':
+                require __DIR__.'/backend/controller/noteController.php';
+                $controller = new noteController();
                 $controller->run();
                 break;
             case 'workspace/notes/notesController':

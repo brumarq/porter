@@ -13,15 +13,15 @@ document.getElementById('workspaces').addEventListener('change', function () {
     loadTasks();
 });
 
-function addFirstWorkspace(){
+function addFirstWorkspace() {
     const givenWorkspaceName = document.getElementById("iptWorkspaceName").value;
 
     addWorkspace(givenWorkspaceName);
-    document.getElementById("introductionWindow").style.visibility = "hidden"; 
-    document.getElementById("workspace").style.visibility = "visible"; 
+    document.getElementById("introductionWindow").style.visibility = "hidden";
+    document.getElementById("workspace").style.visibility = "visible";
 }
 
-function addWorkspace(givenWorkspaceName="") {
+function addWorkspace(givenWorkspaceName = "") {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "workspaceController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -32,7 +32,7 @@ function addWorkspace(givenWorkspaceName="") {
                 const result = data['result'];
 
                 if (result == true) {
-                    console.log("workspace added")
+                    document.location.href = '/workspace';
                 }
             }
         }
@@ -62,7 +62,6 @@ function addCheckboxListeners() {
                         }
                     }
                 }
-
 
                 xhr.send(`action=completeTask&taskId=${taskId}`);
             }

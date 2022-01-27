@@ -9,7 +9,7 @@ class WorkspaceRepository extends Repository
             require __DIR__ . '/../../config.php';
 
             try {
-                // Getting all the available workspaces for loggedin User
+                // Getting all the available workspaces for logged in User
                 $sql = $conn->prepare('SELECT id, name FROM workspaces WHERE fkuser=:loggedUserID');
                 $sql->execute(['loggedUserID' => $userID]);
 
@@ -33,8 +33,6 @@ class WorkspaceRepository extends Repository
             'INSERT INTO workspaces (name, fkuser)
             VALUES (:name, :fkuser);'
         );
-
-        print_r($workspace->getId()); 
 
         return $workspacesSql->execute([ 'name' => $workspace->getName(),
                                          'fkuser' => $workspace->getUser()
