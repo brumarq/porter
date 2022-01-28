@@ -4,6 +4,10 @@ document.getElementById('workspaces').addEventListener('change', function () {
     getNotes();
 });
 
+function deleteNote(){
+    
+}
+
 function getNotes() {
     var selWorkspace = document.getElementById("workspaces");
     var workspace = selWorkspace.options[selWorkspace.selectedIndex].value;

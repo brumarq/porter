@@ -78,4 +78,21 @@ class NoteRepository extends Repository
             'created' => date('Y-m-d H:i:s')
         ]);
     }
+
+    function deleteNote($note)
+    {
+        require __DIR__ . '/../../config.php';
+
+        $tasksSql = $conn->prepare(
+            'DELETE notes
+            FROM notes
+            LEFT JOIN workspaces ON notes.fkWorkspace = workspaces.id
+            WHERE notes.id=:notesID and workspaces.fkuser=:userID'
+        );
+
+        return $tasksSql->execute([
+            'notesID' => $note->getID(),
+            'userID' => $note->getWorkspace()->getUser()
+        ]);
+    }
 }

@@ -34,10 +34,39 @@ class noteController extends Controller
                 case 'getNotes':
                     $this->getNotes();
                     break;
+                case 'deleteNote':
+                    $this->deleteNote();
+                    break;
                 default:
                     # code...
                     break;
             }
+        }
+    }
+
+    function deleteNote(){
+        if (!empty($_SESSION['unique_id'])) {
+            $response = new stdClass;
+
+            if (!empty($_SESSION['currentNoteId'])) {
+
+                if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
+                    $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
+                } else {
+                    $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
+                }
+
+                $note =  new Note($_SESSION['currentNoteId'], null, null, null, null, $workspace, null);
+                $noteService = new NoteService;
+
+                $response->result = $noteService->deleteNote($note);
+            } else {
+                $response->result = "errorRetrievingNote";
+            }
+
+            require __DIR__ . "/../views/api/jsonOutput.php";
+        } else {
+            require __DIR__ . "/../views/login.php";
         }
     }
 

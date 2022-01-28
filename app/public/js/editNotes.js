@@ -1,15 +1,32 @@
 var md = new Remarkable();
 
+document.getElementById("deleteNote").onclick = deleteNote;
+
 function showEditWindow(env) {
     document.getElementById("viewNote").style.display = 'none';
     document.getElementById("editNote").style.display = 'block';
+}
+
+function deleteNote(env) {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "notesController", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onload = ()=>{
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status === 200){
+                document.location.href = "/workspace/notes/";
+            }
+        }
+    }
+
+    xhr.send(`action=deleteNote`);
 }
 
 function saveChanges(env) {
 
     title = document.getElementById("iptTitle").value;
     markupText = document.getElementById("markupText").value;
-    console.log(markupText);
     htmlText = md.render(markupText);
 
     let xhr = new XMLHttpRequest();
@@ -42,7 +59,12 @@ function getNote(){
 
                 if (data != null) {
                     html += `<div class="row mb-3">
-                                <a href="/workspace/notes/" type="button"  class="btn btn-sm btn-outline-dark">Back</a>
+                                <div class="col-6 ">
+                                    <a href="/workspace/notes/" type="button" class="float-left btn btn-sm btn-outline-dark ">Back</a>
+                                </div>  
+                                <div class="col-6 ">
+                                    <button type="button" id="deleteNote" class="float-right btn btn-sm btn-danger"> Delete</button>
+                                </div>                            
                             </div>
                             <div class="row">
                                 <h2 class=" w-100">
