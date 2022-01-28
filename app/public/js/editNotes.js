@@ -58,7 +58,7 @@ function getNote(){
                                 <button type="button" onclick="showEditWindow(this);" class="btn btn-dark">Edit</button>
                             </div>
                             <div id="htmlText" class="row" style="display: contents;">
-                                ${data[0].textHtml}
+${data[0].textHtml}
                             </div>`
                 }
 

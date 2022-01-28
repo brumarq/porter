@@ -1,8 +1,8 @@
-document.getElementById('workspaces').addEventListener('change', function () {
-    loadNotes();
-});
-
 document.getElementById("addNote").onclick = addNote;
+
+document.getElementById('workspaces').addEventListener('change', function () {
+    getNotes();
+});
 
 function getNotes() {
     var selWorkspace = document.getElementById("workspaces");
