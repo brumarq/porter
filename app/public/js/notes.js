@@ -4,8 +4,8 @@ document.getElementById('workspaces').addEventListener('change', function () {
 
 document.getElementById("addNote").onclick = addNote;
 
-function loadNotes() {
-    /*var selWorkspace = document.getElementById("workspaces");
+function getNotes() {
+    var selWorkspace = document.getElementById("workspaces");
     var workspace = selWorkspace.options[selWorkspace.selectedIndex].value;
 
     let xhr = new XMLHttpRequest();
@@ -14,31 +14,29 @@ function loadNotes() {
     xhr.onload = ()=>{
         if(xhr.readyState === XMLHttpRequest.DONE){
             if(xhr.status === 200){
-                let data = JSON.parse(xhr.response);
-                let htmlSubjectSection = "";
-                let hmtlSltSubject = "<option></option>"
+                let notes = JSON.parse(xhr.response);
+                let htmlListOfNotes = "";
 
-                if(data != null){
-                    data.forEach(subject => {
-                        htmlSubjectSection += `<tr>
-                                    <td>${subject.description}</td>
-                                </tr>`
-    
-                        hmtlSltSubject += `<option id="${subject.id}"> ${subject.description} </option>`
+                if(notes != null){
+                    notes.forEach(note => {
+                        htmlListOfNotes += `<a href="/workspace/notes/viewEdit?id=${note["NotesID"]}" class="link-dark">
+                                                    <li class="list-group-item text-dark" >
+                                                         ${note["title"]}
+                                                        <span class="float-right font-italic text-dark">${note["created"]}</span>
+                                                    </li>
+                                                </a>`
                     });
     
-                    document.getElementById("subjectResults").innerHTML = htmlSubjectSection;
-                    document.getElementById("sltSubject").innerHTML = hmtlSltSubject;
+                    document.getElementById("notesList").innerHTML = htmlListOfNotes;
                 }else{ 
-                    document.getElementById("subjectResults").innerHTML = "";
-                    document.getElementById("sltSubject").innerHTML = hmtlSltSubject;
+                    document.getElementById("notesList").innerHTML = "";
                 }
             }
         }
     }
 
 
-    xhr.send(`action=getNotes&workspace=${workspace}`);*/
+    xhr.send(`action=getNotes&workspace=${workspace}`);
 }
 
 
@@ -58,7 +56,7 @@ function addNote() {
                 const result = data['result'];
 
                 if (result == true) {
-                    console.log(result);
+                    getNotes();
                 }
             }
         }

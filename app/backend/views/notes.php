@@ -11,17 +11,17 @@
         </div>
     </div>
     <div class="row">
-        <ul class="list-group  w-100">
+        <ul class="list-group w-100" id="notesList">
             <?php
             if ($workspace->notes != null) {
                 foreach ($workspace->notes as $note) {
             ?>
-            <a href="/workspace/notes/viewEdit?id=<? echo $note["NotesID"] ?>" class="link-dark">
-                <li class="list-group-item text-dark" >
-                    <?php echo $note["title"] ?> 
-                    <span class="float-right font-italic text-dark"><?php echo $note["created"] ?></span>
-                </li>
-            </a>
+                <a href="/workspace/notes/viewEdit?id=<? echo $note["NotesID"] ?>" class="link-dark">
+                    <li class="list-group-item text-dark" >
+                        <?php echo $note["title"] ?> 
+                        <span class="float-right font-italic text-dark"><?php echo $note["created"] ?></span>
+                    </li>
+                </a>
             <?php
                 }
             }

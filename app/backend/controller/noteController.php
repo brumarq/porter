@@ -29,6 +29,9 @@ class noteController extends Controller{
                 case 'addNote':
                     $this->addNote();
                     break;
+                case 'getNotes':
+                    $this->getNotes();
+                    break;
                 default:
                     # code...
                     break;
@@ -56,6 +59,30 @@ class noteController extends Controller{
             $workspace->notes = $noteService->getNotes($workspaceObj);
 
             require __DIR__ . "/../views/notes.php";
+        } else {
+            require __DIR__ . "/../views/login.php";
+        }
+    }
+
+    function getNotes(){
+        if (!empty($_SESSION['unique_id'])) {
+            $userID =  $_SESSION['unique_id'];
+            
+            $noteService = new NoteService();
+            $workspaceService = new WorkspaceService();
+
+            $workspace = new stdClass;
+            $workspace->workspaces = $workspaceService->getWorkspaces($userID, null);
+
+            if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
+                $workspaceObj = new Workspace($workspace->workspaces[0]["id"], $workspace->workspaces[0]["name"], $_SESSION['unique_id']);
+                $_SESSION["workspace"] = $workspaceObj->getId();
+            } else {
+                $workspaceObj =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
+            }
+
+            $response = $noteService->getNotes($workspaceObj);
+            require __DIR__ . "/../views/api/jsonOutput.php";
         } else {
             require __DIR__ . "/../views/login.php";
         }
