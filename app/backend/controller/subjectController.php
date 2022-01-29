@@ -24,6 +24,9 @@ class subjectController extends Controller
                 case 'addSubject':
                     $this->addSubject();
                     break;
+                case 'deleteSubject':
+                    $this->deleteSubject();
+                    break;
                 default:
                     # code...
                     break;
@@ -72,6 +75,32 @@ class subjectController extends Controller
             }
 
             
+
+            require __DIR__ . "/../views/api/jsonOutput.php";
+        } else {
+            require __DIR__ . "/../views/login.php";
+        }
+    }
+
+    public function deleteSubject(){
+        if (!empty($_SESSION['unique_id'])) {
+
+            $response = new stdClass;
+            if (!empty($_POST['subjectID'])) {
+
+                if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
+                    $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
+                } else {
+                    $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
+                }
+
+                $subject =  new Subject($_POST['subjectID'], null, $workspace);
+    
+                $subjectService = new SubjectService;
+                $response->result = $subjectService->deleteSubject($subject);
+            }else {
+                $response->result = "emptyFields";
+            }
 
             require __DIR__ . "/../views/api/jsonOutput.php";
         } else {

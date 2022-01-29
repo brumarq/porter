@@ -21,6 +21,11 @@ class NoteService {
         $repository = new NoteRepository();
         return $repository->addNote($note);  
     }
+
+    public function deleteNote($note) {
+        $repository = new NoteRepository();
+        return $repository->deleteNote($note);  
+    }
 }
 
 ?>

@@ -7,6 +7,12 @@ class WorkspaceService {
         $workspace = $repository->getWorkspaces($userID);
         return $workspace;
     }
+
+    public function addWorkspace($workspace) {
+        $repository = new WorkspaceRepository();
+        $workspace = $repository->addWorkspace($workspace);
+        return $workspace;
+    }
 }
 
 ?>

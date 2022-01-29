@@ -1,5 +1,5 @@
 <?php require('templates/header.php'); ?>
-<div class="container-fluid" style="margin-top: 100px;" hidden>
+<div class="container-fluid" id="workspace" style="margin-top: 100px;"  <?php if (!isset($workspace->workspaces)) { echo "hidden"; }?>>
     <div class="row">
         <div class="col-8">
             <div class="row">
@@ -27,18 +27,20 @@
                         </thead>
                         <tbody id="taskResults">
                             <?php
-                            foreach ($workspace->tasks as $task) {
-                            ?>
-                                <tr>
-                                    <th scope="row" class="text-center" style="width: 0;">
-                                        <input class="form-check-input check_inside_table" style=" position: relative;" name="taskCheckbox" type="checkbox" id="<?php echo $task['taskID'] ?>">
-                                    </th>
-                                    <td><?php echo $task['taskDescription'] ?> </td>
-                                    <td><?php echo $task['dateTime'] ?></td>
-                                    <td><?php echo $task['priority'] ?></td>
-                                    <td><?php echo $task['subject'] != 'null' ? $task['subject'] : '' ?></td>
-                                </tr>
-                            <?php
+                            if ($workspace->tasks != null) {
+                                foreach ($workspace->tasks as $task) {
+                                ?>
+                                    <tr>
+                                        <th scope="row" class="text-center" style="width: 0;">
+                                            <input class="form-check-input check_inside_table" style=" position: relative;" name="taskCheckbox" type="checkbox" id="<?php echo $task['taskID'] ?>">
+                                        </th>
+                                        <td><?php echo $task['taskDescription'] ?> </td>
+                                        <td><?php echo $task['dateTime'] ?></td>
+                                        <td><?php echo $task['priority'] ?></td>
+                                        <td><?php echo $task['subject'] != 'null' ? $task['subject'] : '' ?></td>
+                                    </tr>
+                                <?php
+                                }
                             }
                             ?>
                         </tbody>
@@ -67,9 +69,7 @@
                                         if ($workspace->subjects != null) {
                                             foreach ($workspace->subjects as $subject) {
                                         ?>
-
                                                 <option id="<?php echo $subject['id'] ?>"><?php echo $subject['description'] ?> </option>
-
                                         <?php
                                             }
                                         }
@@ -92,9 +92,14 @@
                             if ($workspace->subjects != null) {
                                 foreach ($workspace->subjects as $subject) {
                             ?>
-                                    <tr>
-                                        <td><?php echo $subject['description'] ?> </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <?php echo $subject['description'] ?> 
+                                        <span id='clickableAwesomeFont' onclick="deleteSubject(<?php echo $subject['id'] ?>)">
+                                            <i class="bi bi-trash float-right"></i>
+                                        </span>
+                                    </td>
+                                </tr>
                             <?php
                                 }
                             }
@@ -106,7 +111,7 @@
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="inptSubject" placeholder="Subject">
                                         <div class="input-group-append">
-                                            <button class="btn btn-sm btn-dark" id="addSubject" type="button">Add</button>
+                                            <button class="btn btn-sm btn-red " id="addSubject" type="button">Add</button>
                                         </div>
                                     </div>
                                 </td>
@@ -118,16 +123,19 @@
         </div>
     </div>
 </div>
-<main class="form-signin text-center" style="margin-top: 150px;">
+
+<main class="form-signin text-center" id="introductionWindow" style="margin-top: 150px;" <?php if (isset($workspace->workspaces)) { echo "hidden"; }?>>
     <form class="loginForm" name="login">
         <h1>Create your first Workspace!</h1>
         <p>A workspace can contain all your tasks and personal notes. You can create several workspaces depending on your needs! <br> Let's create the first one:</p>
-        <input type="text" class=" form-control input" id="iptTaskDescription" placeholder="Workspace Name">
-        <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Create!</button>
+        <input type="text" class=" form-control input" id="iptWorkspaceName" placeholder="Workspace Name">
+        <button class="w-100 btn btn-lg btn-primary mt-2" id="createFirstWorkspace" type="button">Create!</button>
     </form>
 </main>
 
 <script src="/js/workspace.js"></script>
+<script src="/js/logout.js"></script>
+
 <link rel="stylesheet" href="../css/workspace.css">
 
 <?php require('templates/footer.php'); ?>

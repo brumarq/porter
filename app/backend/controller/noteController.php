@@ -9,10 +9,12 @@ require __DIR__ . '/../services/noteService.php';
 require __DIR__ . '/../models/Notes.php';
 require __DIR__ . '/../models/Workspace.php';
 
-class noteController extends Controller{
-    public function run(){
-        
-        if(isset($_POST['action'])){
+class noteController extends Controller
+{
+    public function run()
+    {
+
+        if (isset($_POST['action'])) {
             switch ($_POST['action']) {
                 case 'loadNotes':
                     $this->loadNotes();
@@ -29,6 +31,12 @@ class noteController extends Controller{
                 case 'addNote':
                     $this->addNote();
                     break;
+                case 'getNotes':
+                    $this->getNotes();
+                    break;
+                case 'deleteNote':
+                    $this->deleteNote();
+                    break;
                 default:
                     # code...
                     break;
@@ -36,10 +44,37 @@ class noteController extends Controller{
         }
     }
 
-    function loadNotes(){
+    function deleteNote(){
+        if (!empty($_SESSION['unique_id'])) {
+            $response = new stdClass;
+
+            if (!empty($_SESSION['currentNoteId'])) {
+
+                if (!array_key_exists("workspace", $_SESSION) || $_SESSION["workspace"] == null) {
+                    $workspace =  new Workspace($_POST['workspace'], null, $_SESSION['unique_id']);
+                } else {
+                    $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
+                }
+
+                $note =  new Note($_SESSION['currentNoteId'], null, null, null, null, $workspace, null);
+                $noteService = new NoteService;
+
+                $response->result = $noteService->deleteNote($note);
+            } else {
+                $response->result = "errorRetrievingNote";
+            }
+
+            require __DIR__ . "/../views/api/jsonOutput.php";
+        } else {
+            require __DIR__ . "/../views/login.php";
+        }
+    }
+
+    function loadNotes()
+    {
         if (!empty($_SESSION['unique_id'])) {
             $userID =  $_SESSION['unique_id'];
-            
+
             $noteService = new NoteService();
             $workspaceService = new WorkspaceService();
 
@@ -61,9 +96,33 @@ class noteController extends Controller{
         }
     }
 
-    
+    function getNotes()
+    {
+        if (!empty($_SESSION['unique_id'])) {
+            $userID =  $_SESSION['unique_id'];
 
-    function getNote(){
+            $noteService = new NoteService();
+            $workspaceService = new WorkspaceService();
+
+            $workspace = new stdClass;
+            $workspace->workspaces = $workspaceService->getWorkspaces($userID, null);
+
+            if (array_key_exists("workspace", $_POST) || $_POST['workspace'] != null) {
+                $_SESSION["workspace"] = $_POST['workspace'];
+                $workspaceObj =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
+            }
+
+            $response = $noteService->getNotes($workspaceObj);
+            require __DIR__ . "/../views/api/jsonOutput.php";
+        } else {
+            require __DIR__ . "/../views/login.php";
+        }
+    }
+
+
+
+    function getNote()
+    {
         if (!empty($_SESSION['unique_id'])) {
             $userID =  $_SESSION['unique_id'];
             $noteID = $_GET['id'];
@@ -78,7 +137,8 @@ class noteController extends Controller{
         }
     }
 
-    function getNoteJson(){
+    function getNoteJson()
+    {
         if (!empty($_SESSION['unique_id'])) {
             $userID =  $_SESSION['unique_id'];
             $noteID = $_SESSION['currentNoteId'];
@@ -92,7 +152,8 @@ class noteController extends Controller{
         }
     }
 
-    function addNote(){
+    function addNote()
+    {
         if (!empty($_SESSION['unique_id'])) {
             $response = new stdClass;
 
@@ -104,16 +165,13 @@ class noteController extends Controller{
                     $workspace =  new Workspace($_SESSION["workspace"], null, $_SESSION['unique_id']);
                 }
 
-
                 $subject =  new Note(null, $_POST['title'], null, null, null, $workspace, null);
                 $noteService = new NoteService;
 
                 $response->result = $noteService->addNote($subject);
-            }else {
+            } else {
                 $response->result = "emptyField";
             }
-
-            
 
             require __DIR__ . "/../views/api/jsonOutput.php";
         } else {
@@ -121,10 +179,11 @@ class noteController extends Controller{
         }
     }
 
-    function saveChanges(){
+    function saveChanges()
+    {
         if (!empty($_SESSION['unique_id'])) {
             $userID =  $_SESSION['unique_id'];
-            
+
             $id = $_SESSION['currentNoteId'];
             $title = $_POST['title'];
             $markup = $_POST['markup'];

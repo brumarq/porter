@@ -1,19 +1,49 @@
 
 document.getElementById("addTask").onclick = addTask;
 document.getElementById("addSubject").onclick = addSubject;
+document.getElementById("createFirstWorkspace").onclick = addFirstWorkspace;
 
-window.onload = function() {
+
+window.onload = function () {
     addCheckboxListeners();
 };
 
-document.getElementById('workspaces').addEventListener('change', function() {
+document.getElementById('workspaces').addEventListener('change', function () {
     loadSubjects();
     loadTasks();
 });
 
-function addCheckboxListeners(){
-    document.querySelectorAll("input[name=taskCheckbox]").forEach(taskCheckbox => {;
-        taskCheckbox.addEventListener('change', function() {
+function addFirstWorkspace() {
+    const givenWorkspaceName = document.getElementById("iptWorkspaceName").value;
+
+    addWorkspace(givenWorkspaceName);
+    document.getElementById("introductionWindow").style.visibility = "hidden";
+    document.getElementById("workspace").style.visibility = "visible";
+}
+
+function addWorkspace(givenWorkspaceName = "") {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "workspaceController", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let data = JSON.parse(xhr.response);
+                const result = data['result'];
+
+                if (result == true) {
+                    document.location.href = '/workspace';
+                }
+            }
+        }
+    }
+
+    xhr.send(`action=addWorkspace&name=${givenWorkspaceName}`);
+}
+
+function addCheckboxListeners() {
+    document.querySelectorAll("input[name=taskCheckbox]").forEach(taskCheckbox => {
+        taskCheckbox.addEventListener('change', function () {
             if (this.checked) {
                 const taskId = this.id;
 
@@ -33,35 +63,36 @@ function addCheckboxListeners(){
                     }
                 }
 
-
                 xhr.send(`action=completeTask&taskId=${taskId}`);
             }
         });
     });
 }
 
-function addTask(){
+
+
+function addTask() {
     let task = document.getElementById("iptTaskDescription").value;
     let dateTime = document.getElementById("iptDate").value;
 
     var selPriority = document.getElementById("sltPriority");
-    var priority= selPriority.options[selPriority.selectedIndex].text;
+    var priority = selPriority.options[selPriority.selectedIndex].text;
 
     var selSubject = document.getElementById("sltSubject");
-    var subject= selSubject.options[selSubject.selectedIndex].id;
+    var subject = selSubject.options[selSubject.selectedIndex].id;
 
     var selWorkspace = document.getElementById("workspaces");
     var workspace = selWorkspace.options[selWorkspace.selectedIndex].value;
-    
+
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "taskController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = ()=>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
                 let data = JSON.parse(xhr.response);
                 const result = data['result'];
-                
+
                 if (result == true) {
                     loadTasks();
                 }
@@ -73,21 +104,21 @@ function addTask(){
     xhr.send(`action=addTask&task=${task}&dateTime=${dateTime}&priority=${priority}&subject=${subject}&workspace=${workspace}`);
 }
 
-function addSubject(){
+function addSubject() {
     let subject = document.getElementById("inptSubject").value;
-    
+
     var selWorkspace = document.getElementById("workspaces");
     var workspace = selWorkspace.options[selWorkspace.selectedIndex].value;
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "subjectController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = ()=>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
                 let data = JSON.parse(xhr.response);
                 const result = data['result'];
-                
+
                 if (result == true) {
                     loadSubjects();
                 }
@@ -98,32 +129,32 @@ function addSubject(){
     xhr.send(`action=addSubject&subject=${subject}&workspace=${workspace}`);
 }
 
-function loadSubjects(){
+function loadSubjects() {
     var selWorkspace = document.getElementById("workspaces");
     var workspace = selWorkspace.options[selWorkspace.selectedIndex].value;
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "subjectController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = ()=>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
                 let data = JSON.parse(xhr.response);
                 let htmlSubjectSection = "";
                 let hmtlSltSubject = "<option></option>"
 
-                if(data != null){
+                if (data != null) {
                     data.forEach(subject => {
                         htmlSubjectSection += `<tr>
                                     <td>${subject.description}</td>
                                 </tr>`
-    
+
                         hmtlSltSubject += `<option id="${subject.id}"> ${subject.description} </option>`
                     });
-    
+
                     document.getElementById("subjectResults").innerHTML = htmlSubjectSection;
                     document.getElementById("sltSubject").innerHTML = hmtlSltSubject;
-                }else{ 
+                } else {
                     document.getElementById("subjectResults").innerHTML = "";
                     document.getElementById("sltSubject").innerHTML = hmtlSltSubject;
                 }
@@ -135,16 +166,16 @@ function loadSubjects(){
     xhr.send(`action=getSubjects&workspace=${workspace}`);
 }
 
-function loadTasks(){
+function loadTasks() {
     var selWorkspace = document.getElementById("workspaces");
     var workspace = selWorkspace.options[selWorkspace.selectedIndex].value;
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "taskController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = ()=>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
                 let data = JSON.parse(xhr.response);
                 let html = "";
 
@@ -157,13 +188,13 @@ function loadTasks(){
                                     <td>${task.taskDescription} </td>
                                     <td>${task.dateTime}</td>
                                     <td>${task.priority}</td>
-                                    <td>${task.subject == null ? "": task.subject }</td>
+                                    <td>${task.subject == null ? "" : task.subject}</td>
                                 </tr>`
                     });
-    
+
                     document.getElementById("taskResults").innerHTML = html;
                     addCheckboxListeners();
-                }else{ 
+                } else {
                     document.getElementById("taskResults").innerHTML = "";
                 }
             }
@@ -174,3 +205,23 @@ function loadTasks(){
     xhr.send(`action=getTasks&workspace=${workspace}`);
 }
 
+function deleteSubject(subjectID){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "subjectController", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let data = JSON.parse(xhr.response);
+                const result = data['result'];
+
+                if (result == true) {
+                    loadSubjects();
+                    loadTasks();
+                }
+            }
+        }
+    }
+
+    xhr.send(`action=deleteSubject&subjectID=${subjectID}`);
+}

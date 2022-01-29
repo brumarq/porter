@@ -13,7 +13,9 @@ class userController extends Controller{
                 case 'signup':
                     $this->signup();
                     break;
-                
+                case 'logout':
+                    $this->logout();
+                    break;
                 default:
                     # code...
                     break;
@@ -63,6 +65,13 @@ class userController extends Controller{
             $response->message = "Fill in all input fields!";
         }
 
+        require __DIR__ . "/../views/api/jsonOutput.php";
+    }
+
+    public function logout(){
+        session_destroy();
+        $response = new stdClass;
+        $response->result = true;
         require __DIR__ . "/../views/api/jsonOutput.php";
     }
 }

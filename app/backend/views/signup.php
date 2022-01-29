@@ -42,6 +42,7 @@
 </main>
 
 <script src="/js/signup.js"></script>
+
 <link rel="stylesheet" href="../css/login.css">
 <link rel="stylesheet" href="../css/main.css">
 

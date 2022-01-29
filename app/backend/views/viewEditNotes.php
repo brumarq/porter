@@ -23,8 +23,14 @@
     </header>
     <div class="container" id="viewNote" style="margin-top: 100px;">
         <div class="row mb-3">
-            <a href="/workspace/notes/" type="button" class="btn btn-sm btn-outline-dark">Back</a>
+            <div class="col-6 ">
+                <a href="/workspace/notes/" type="button" class="float-left btn btn-sm btn-outline-dark"> Back</a>
+            </div>
+            <div class="col-6 ">
+                <button id="deleteNote" type="button" class="float-right btn btn-sm btn-danger"> Delete</button>
+            </div>
         </div>
+
         <div class="row">
             <h2 class=" w-100">
                 <?php echo $note[0]["title"] ?>
@@ -55,4 +61,5 @@
         <button style="position: fixed; bottom:10px; right:10px;" type="button" onclick="saveChanges(this);" class="btn btn-dark">Save Changes</button>
     </div>
     <script src="/js/editNotes.js"></script>
+    
     <?php require('templates/footer.php'); ?>

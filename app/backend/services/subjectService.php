@@ -11,6 +11,11 @@ class SubjectService {
         $repository = new SubjectRepository();
         return $repository->addSubject($subject);  
     }
+
+    public function deleteSubject($subject) {
+        $repository = new SubjectRepository();
+        return $repository->deleteSubject($subject);  
+    }
 }
 
 ?>
