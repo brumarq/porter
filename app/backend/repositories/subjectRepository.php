@@ -37,4 +37,22 @@ class SubjectRepository extends Repository
                                     'description' => $name 
                                 ]);
     }
+
+    function deleteSubject($subject)
+    {
+        require __DIR__ . '/../../config.php';
+
+        $tasksSql = $conn->prepare(
+            'DELETE subj FROM subjects as subj 
+            LEFT JOIN workspaces as ws on subj.fkWorkspace=ws.id
+            WHERE subj.id=:subjectId and ws.fkuser=:userId'
+        );
+
+        $workspace = $subject->getWorkspace();
+        $userId = $workspace->getUser();
+
+        return $tasksSql->execute([ 'subjectId' => $subject->getID(),
+                                    'userId' => $userId 
+                                ]);
+    }
 }

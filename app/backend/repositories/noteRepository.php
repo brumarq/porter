@@ -8,9 +8,8 @@ class NoteRepository extends Repository
         require __DIR__ . '/../../config.php';
 
         $tasksSql = $conn->prepare(
-            'SELECT notes.id as NotesID, title, created, sub.description as subDescription
+            'SELECT notes.id as NotesID, title, created
             FROM notes
-            LEFT JOIN subjects as sub ON notes.fkSubject = sub.id
             WHERE notes.fkWorkspace=:workspaceID
             ORDER BY created DESC'
 
@@ -28,10 +27,9 @@ class NoteRepository extends Repository
         require __DIR__ . '/../../config.php';
 
         $tasksSql = $conn->prepare(
-            'SELECT notes.id, title, textMarkup, textHtml, created, sub.id as subID, sub.description as subDescription
-                                    FROM notes
-                                    LEFT JOIN subjects as sub ON notes.fkSubject = sub.id
-                                    WHERE notes.id=:notesId'
+            'SELECT notes.id, title, textMarkup, textHtml, created
+            FROM notes
+            WHERE notes.id=:notesId'
         );
 
         $tasksSql->execute(['notesId' => $noteID]);

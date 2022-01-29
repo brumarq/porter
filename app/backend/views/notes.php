@@ -30,4 +30,6 @@
     </div>
 </div>
 <script src="/js/notes.js"></script>
+<script src="/js/logout.js"></script>
+
 <?php require('templates/footer.php'); ?>

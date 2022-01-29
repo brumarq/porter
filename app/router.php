@@ -47,6 +47,11 @@ class Router
                 $controller = new userController();
                 $controller->run();
                 break;
+            case 'workspace/userController':
+                require __DIR__ . '/backend/controller/userController.php';
+                $controller = new userController();
+                $controller->run();
+                break;
             case 'workspaceController':
                 require __DIR__ . '/backend/controller/workspaceController.php';
                 $controller = new workspaceController();

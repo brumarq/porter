@@ -69,9 +69,7 @@
                                         if ($workspace->subjects != null) {
                                             foreach ($workspace->subjects as $subject) {
                                         ?>
-
                                                 <option id="<?php echo $subject['id'] ?>"><?php echo $subject['description'] ?> </option>
-
                                         <?php
                                             }
                                         }
@@ -94,9 +92,14 @@
                             if ($workspace->subjects != null) {
                                 foreach ($workspace->subjects as $subject) {
                             ?>
-                                    <tr>
-                                        <td><?php echo $subject['description'] ?> </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <?php echo $subject['description'] ?> 
+                                        <span id='clickableAwesomeFont' onclick="deleteSubject(<?php echo $subject['id'] ?>)">
+                                            <i class="bi bi-trash float-right"></i>
+                                        </span>
+                                    </td>
+                                </tr>
                             <?php
                                 }
                             }
@@ -108,7 +111,7 @@
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="inptSubject" placeholder="Subject">
                                         <div class="input-group-append">
-                                            <button class="btn btn-sm btn-dark" id="addSubject" type="button">Add</button>
+                                            <button class="btn btn-sm btn-red " id="addSubject" type="button">Add</button>
                                         </div>
                                     </div>
                                 </td>
@@ -131,6 +134,8 @@
 </main>
 
 <script src="/js/workspace.js"></script>
+<script src="/js/logout.js"></script>
+
 <link rel="stylesheet" href="../css/workspace.css">
 
 <?php require('templates/footer.php'); ?>

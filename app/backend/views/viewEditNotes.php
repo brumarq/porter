@@ -61,4 +61,5 @@
         <button style="position: fixed; bottom:10px; right:10px;" type="button" onclick="saveChanges(this);" class="btn btn-dark">Save Changes</button>
     </div>
     <script src="/js/editNotes.js"></script>
+    
     <?php require('templates/footer.php'); ?>

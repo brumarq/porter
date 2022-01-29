@@ -205,3 +205,23 @@ function loadTasks() {
     xhr.send(`action=getTasks&workspace=${workspace}`);
 }
 
+function deleteSubject(subjectID){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "subjectController", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let data = JSON.parse(xhr.response);
+                const result = data['result'];
+
+                if (result == true) {
+                    loadSubjects();
+                    loadTasks();
+                }
+            }
+        }
+    }
+
+    xhr.send(`action=deleteSubject&subjectID=${subjectID}`);
+}
