@@ -14,7 +14,7 @@
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col" class="minWidth">Task</th>
-                                <th scope="col">Date / Time</th>
+                                <th scope="col" style="min-width: 270px;">Date / Time</th>
                                 <th scope="col" class="minWidth">Priority</th>
                                 <th scope="col" class="minWidth">Subject</th>
                             </tr>
