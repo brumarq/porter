@@ -7,15 +7,15 @@ class TaskRepository extends Repository
     {
         require __DIR__ . '/../../config.php';
 
-        // Getting all the tasks of specific user
         $tasksSql = $conn->prepare(
             'SELECT tasks.id as "taskID", taskDescription, dateTime, priority, sub.description as "subject"
                                     FROM tasks
-                                    LEFT JOIN subjects as sub
-                                        ON tasks.fkSubject = sub.id
-                                    WHERE tasks.fkWorkspace=:workspaceID AND status="open"'
+                                    LEFT JOIN subjects as sub ON tasks.fkSubject = sub.id
+                                    LEFT JOIN workspaces as wks ON tasks.fkWorkspace = wks.id
+                                    WHERE tasks.fkWorkspace=:workspaceID AND wks.fkUser=:loggedInUser AND status="open"'
         );
-        $tasksSql->execute(['workspaceID' => $selectedWorkspace->getId()]);
+        $tasksSql->execute(['workspaceID' => $selectedWorkspace->getId(),
+                            'loggedInUser' => $_SESSION['unique_id']]);
         if ($tasksSql->rowCount() > 0) {
             return $tasksSql->fetchAll(PDO::FETCH_ASSOC);
         } else {
@@ -27,7 +27,6 @@ class TaskRepository extends Repository
     {
         require __DIR__ . '/../../config.php';
 
-        // Getting all the tasks of specific user
         $tasksSql = $conn->prepare(
             'INSERT INTO tasks (taskDescription, dateTime, priority, fkWorkspace, fkSubject)
             VALUES (:taskDescription, :dateTime, :priority, :fkWorkspace, :fkSubject);'
@@ -48,7 +47,6 @@ class TaskRepository extends Repository
     {
         require __DIR__ . '/../../config.php';
 
-        // Getting all the tasks of specific user
         $tasksSql = $conn->prepare(
             'UPDATE tasks
             SET status = "closed"

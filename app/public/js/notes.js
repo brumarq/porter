@@ -4,10 +4,6 @@ document.getElementById('workspaces').addEventListener('change', function () {
     getNotes();
 });
 
-function deleteNote(){
-    
-}
-
 function getNotes() {
     var selWorkspace = document.getElementById("workspaces");
     var workspace = selWorkspace.options[selWorkspace.selectedIndex].value;
@@ -15,13 +11,13 @@ function getNotes() {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "notesController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = ()=>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
                 let notes = JSON.parse(xhr.response);
                 let htmlListOfNotes = "";
 
-                if(notes != null){
+                if (notes != null) {
                     notes.forEach(note => {
                         htmlListOfNotes += `<a href="/workspace/notes/viewEdit?id=${note["NotesID"]}" class="link-dark">
                                                     <li class="list-group-item text-dark" >
@@ -30,9 +26,9 @@ function getNotes() {
                                                     </li>
                                                 </a>`
                     });
-    
+
                     document.getElementById("notesList").innerHTML = htmlListOfNotes;
-                }else{ 
+                } else {
                     document.getElementById("notesList").innerHTML = "";
                 }
             }

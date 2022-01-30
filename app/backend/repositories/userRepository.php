@@ -32,7 +32,6 @@ class UserRepository extends Repository
     function addUser($email, $password, $firstName, $lastName)
     {
         try {
-            // Temporary
             require __DIR__ . '/../../config.php';
 
             try {
@@ -40,7 +39,10 @@ class UserRepository extends Repository
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $stmt = $conn->prepare('INSERT INTO users (fName, lName, email, password)
-                                        VALUES (:firstName, :lastName, :email, :password);
+                                        SELECT :firstName, :lastName, :email, :password FROM users 
+                                        WHERE NOT EXISTS (SELECT id FROM users 
+                                            WHERE `email`=:email LIMIT 1);
+
                                         SELECT LAST_INSERT_ID() as userId;'
                                     );
                 $stmt->execute(['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password]);

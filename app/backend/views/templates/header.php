@@ -56,6 +56,9 @@
                     </div>                   
                 </ul>
                 <ul class="ml-auto">
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    New Workspace
+                </button>
                     <button class=" btn btn-sm btn-danger" id="logoutButton">Logout</button>
                 </ul>
                 <?php
@@ -65,3 +68,23 @@
             </div>
         </nav>
     </header>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add a new workspace</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class=" form-control input" id="iptWorkspaceName" placeholder="Workspace Name">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="createNewWorkspace">Add</button>
+            </div>
+            </div>
+        </div>
+    </div>

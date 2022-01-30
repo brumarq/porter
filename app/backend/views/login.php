@@ -14,15 +14,6 @@
                     <input type="password" name="password" class="form-control mt-3" id="password" placeholder="Password">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 form-floating">
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                    </div>
-                </div>
-            </div>
             <div class="row mb-1">
                 <div class="col-12 form-floating">
                     <small id="errorMessage" class=" p-4 text-danger">
@@ -31,7 +22,7 @@
             </div>
             <div class="row">
                 <div class="col-12 form-floating">
-                    <button class="w-100 btn btn-lg btn-primary btnLogin" type="submit">Sign in</button>
+                    <button class="w-100 btn btn-lg btn-primary btnLogin" type="submit">Sign In</button>
                 </div>
             </div>
         </div>

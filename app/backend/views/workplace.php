@@ -1,28 +1,22 @@
 <?php require('templates/header.php'); ?>
 <div class="container-fluid" id="workspace" style="margin-top: 100px;"  <?php if (!isset($workspace->workspaces)) { echo "hidden"; }?>>
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8 col-md-12">
             <div class="row">
                 <div class="col-12">
-                    <h2>Tasks
-                        <div class="float-right">
-                            <button type="button" class="btn btn-sm btn-secondary-dark">Today</button>
-                            <button type="button" class="btn btn-sm btn-secondary-dark">Week</button>
-                            <button type="button" class="btn btn-sm btn-secondary-dark">All</button>
-                        </div>
-                    </h2>
+                    <h2>Tasks</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 table-responsive">
                     <table class="table table-sm">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Task</th>
+                                <th scope="col" class="minWidth">Task</th>
                                 <th scope="col">Date / Time</th>
-                                <th scope="col">Priority</th>
-                                <th scope="col">Subject</th>
+                                <th scope="col" class="minWidth">Priority</th>
+                                <th scope="col" class="minWidth">Subject</th>
                             </tr>
                         </thead>
                         <tbody id="taskResults">
@@ -53,7 +47,7 @@
                                     <input type="text" class="form-control input-sm" id="iptTaskDescription" placeholder="Task">
                                 </td>
                                 <td class="pt-3">
-                                    <input type="datetime-local" class="form-control input-sm" id="iptDate" placeholder="Date">
+                                    <input type="datetime-local" class="form-control input-sm" id="iptDate" value="<?php echo date('Y-m-d\TH:i:s'); ?>">
                                 </td>
                                 <td class="pt-3">
                                     <select class="form-control input-sm" name="workspaces" id="sltPriority">
@@ -82,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-md-12">
             <h2>Subjects</h2>
             <div class="row">
                 <div class="col-12">
@@ -128,14 +122,14 @@
     <form class="loginForm" name="login">
         <h1>Create your first Workspace!</h1>
         <p>A workspace can contain all your tasks and personal notes. You can create several workspaces depending on your needs! <br> Let's create the first one:</p>
-        <input type="text" class=" form-control input" id="iptWorkspaceName" placeholder="Workspace Name">
-        <button class="w-100 btn btn-lg btn-primary mt-2" id="createFirstWorkspace" type="button">Create!</button>
+        <input type="text" class=" form-control input" id="iptFirstWorkspaceName" placeholder="Workspace Name">
+        <button class="w-100 btn btn-lg btn-primary mt-2" id="createFirstWorkspace" onclick="addFirstWorkspace()" type="button">Create!</button>
     </form>
 </main>
 
 <script src="/js/workspace.js"></script>
 <script src="/js/logout.js"></script>
-
+<script src="/js/header.js"></script>
 <link rel="stylesheet" href="../css/workspace.css">
 
 <?php require('templates/footer.php'); ?>

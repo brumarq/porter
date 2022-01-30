@@ -21,45 +21,58 @@
             </button>
         </nav>
     </header>
-    <div class="container" id="viewNote" style="margin-top: 100px;">
+    <div class="container" id="viewNote" style="margin-top: 100px; padding: 15px;">
         <div class="row mb-3">
             <div class="col-6 ">
                 <a href="/workspace/notes/" type="button" class="float-left btn btn-sm btn-outline-dark"> Back</a>
             </div>
             <div class="col-6 ">
+            <?php if ($note){  ?>
                 <button id="deleteNote" type="button" class="float-right btn btn-sm btn-danger"> Delete</button>
+                <?php } ?>
             </div>
         </div>
-
-        <div class="row">
-            <h2 class=" w-100">
-                <?php echo $note[0]["title"] ?>
-                <div class="float-right">
-                    <span class=" font-italic text-dark"><?php echo $note[0]["created"] ?></span>
+        <div id="noteInfo">
+            <?php if ($note){  ?>
+            <div class="row">
+                <div class="col-12">
+                    <h2 class=" w-100">
+                        else {echo "Does not exits"; } 
+                        <div class="float-right">
+                            <span class=" font-italic text-dark"><?php echo $note[0]["created"] ?></span>
+                        </div>
+                    </h2>
                 </div>
-            </h2>
-        </div>
-        <hr>
-        <div class="row  float-right">
-            <button type="button" onclick="showEditWindow(this);" class="btn btn-dark">Edit</button>
-        </div>
-        <div id="htmlText" class="row" style="display: contents;">
-            <?php echo $note[0]["textHtml"] ?>
+            </div>
+            <hr>
+            <div class="row  float-right">
+                <div class="col-12">
+                    <button type="button" onclick="showEditWindow(this);" class="btn btn-dark">Edit</button>
+                </div>
+            </div>
+            <div id="htmlText" class="row" style="display: contents;">
+                <?php echo $note[0]["textHtml"] ?>
+            </div>
+            <?php } else { echo "Does Not Exist"; } ?>
         </div>
     </div>
 
     <div class="container" id="editNote" style="margin-top: 100px; display:none;">
         <div class="row">
-            <input type="text" class="form-control input-sm" id="iptTitle" placeholder="Task" value="<?php echo $note[0]["title"] ?>">
+            <div class="col-12">
+                <input type="text" class="form-control input-sm" id="iptTitle" placeholder="Task" value="<?php echo $note[0]["title"] ?>">
+            </div>
         </div>
         <hr>
         <div class="row">
-            <textarea class="form-control" id="markupText" rows="100">
+            <div class="col-12">
+                <textarea class="form-control" id="markupText" rows="100">
 <?php echo $note[0]["textMarkup"] ?>
             </textarea>
+            </div>
         </div>
         <button style="position: fixed; bottom:10px; right:10px;" type="button" onclick="saveChanges(this);" class="btn btn-dark">Save Changes</button>
     </div>
     <script src="/js/editNotes.js"></script>
-    
+
     <?php require('templates/footer.php'); ?>

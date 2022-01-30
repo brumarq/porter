@@ -1,23 +1,25 @@
 const signupForm = document.querySelector(".signupForm"),
-signupButton = signupForm.querySelector(".btnSignup");
+    signupButton = signupForm.querySelector(".btnSignup");
 
-signupForm.onclick = (e)=>{
+signupForm.onclick = (e) => {
     e.preventDefault();
 }
 
-signupButton.onclick = ()=>{
+signupButton.onclick = () => {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "userController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = ()=>{
-        if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status === 200){
+    xhr.onload = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
                 let data = JSON.parse(xhr.response);
                 const result = data['message'];
-                
+
                 if (result == "userAdded") {
                     document.location.href = "workspace";
-                } else  {
+                } else if (result == null) {
+                    document.getElementById("errorMessage").innerHTML = "Email already exists!"
+                } else {
                     document.getElementById("errorMessage").innerHTML = result;
                 }
             }
