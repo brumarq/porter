@@ -1,4 +1,6 @@
-document.getElementById("logoutButton").onclick = logout;
+if (document.getElementById("logoutButton") != undefined) {
+    document.getElementById("logoutButton").onclick = logout;
+}
 
 
 function logout(){

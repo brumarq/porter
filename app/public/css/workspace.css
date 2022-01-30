@@ -16,3 +16,6 @@
     padding: 15px;
     margin: auto;
   }
+.minWidth {
+    min-width: 150px;
+}

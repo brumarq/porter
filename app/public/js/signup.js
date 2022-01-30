@@ -17,6 +17,8 @@ signupButton.onclick = ()=>{
                 
                 if (result == "userAdded") {
                     document.location.href = "workspace";
+                }else if (result == null) {
+                    document.getElementById("errorMessage").innerHTML = "Email already exists!"
                 } else  {
                     document.getElementById("errorMessage").innerHTML = result;
                 }

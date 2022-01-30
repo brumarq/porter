@@ -53,6 +53,7 @@ class Router
                 $controller->run();
                 break;
             case 'workspaceController':
+            case 'workspace/workspaceController':
                 require __DIR__ . '/backend/controller/workspaceController.php';
                 $controller = new workspaceController();
                 $controller->run();

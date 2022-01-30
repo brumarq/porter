@@ -1,44 +1,29 @@
 
 document.getElementById("addTask").onclick = addTask;
 document.getElementById("addSubject").onclick = addSubject;
-document.getElementById("createFirstWorkspace").onclick = addFirstWorkspace;
-
 
 window.onload = function () {
     addCheckboxListeners();
 };
 
-document.getElementById('workspaces').addEventListener('change', function () {
-    loadSubjects();
-    loadTasks();
-});
+if (document.getElementById('workspaces') != undefined) {
+    document.getElementById('workspaces').addEventListener('change', function () {
+        loadSubjects();
+        loadTasks();
+    });
+}
 
 function addFirstWorkspace() {
-    const givenWorkspaceName = document.getElementById("iptWorkspaceName").value;
+    const givenWorkspaceName = document.getElementById("iptFirstWorkspaceName").value;
 
     addWorkspace(givenWorkspaceName);
     document.getElementById("introductionWindow").style.visibility = "hidden";
     document.getElementById("workspace").style.visibility = "visible";
 }
 
-function addWorkspace(givenWorkspaceName = "") {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "workspaceController", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = JSON.parse(xhr.response);
-                const result = data['result'];
-
-                if (result == true) {
-                    document.location.href = '/workspace';
-                }
-            }
-        }
-    }
-
-    xhr.send(`action=addWorkspace&name=${givenWorkspaceName}`);
+function addWorkspace() {
+    const givenWorkspaceName = document.getElementById("iptWorkspaceName").value;
+    addWorkspace(givenWorkspaceName);
 }
 
 function addCheckboxListeners() {
@@ -146,8 +131,13 @@ function loadSubjects() {
                 if (data != null) {
                     data.forEach(subject => {
                         htmlSubjectSection += `<tr>
-                                    <td>${subject.description}</td>
-                                </tr>`
+                                                    <td>
+                                                        ${subject.description} 
+                                                        <span id='clickableAwesomeFont' onclick="deleteSubject(${subject.id})">
+                                                            <i class="bi bi-trash float-right"></i>
+                                                        </span>
+                                                    </td>
+                                                </tr>`
 
                         hmtlSltSubject += `<option id="${subject.id}"> ${subject.description} </option>`
                     });
