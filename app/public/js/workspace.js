@@ -1,6 +1,11 @@
 
-document.getElementById("addTask").onclick = addTask;
-document.getElementById("addSubject").onclick = addSubject;
+if (document.getElementById('addTask') != undefined) {
+    document.getElementById("addTask").onclick = addTask;
+}
+
+if (document.getElementById('addSubject') != undefined) {
+    document.getElementById("addSubject").onclick = addSubject;
+}
 
 window.onload = function () {
     addCheckboxListeners();
@@ -195,7 +200,7 @@ function loadTasks() {
     xhr.send(`action=getTasks&workspace=${workspace}`);
 }
 
-function deleteSubject(subjectID){
+function deleteSubject(subjectID) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "subjectController", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
