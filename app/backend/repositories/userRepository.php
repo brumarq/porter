@@ -37,22 +37,24 @@ class UserRepository extends Repository
             try {
                 $conn = new PDO("mysql:host=$servername;dbname=$databasename", $dbusername, $dbpassword);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $stmt = $conn->prepare('INSERT INTO users (fName, lName, email, password)
-                                        SELECT :firstName, :lastName, :email, :password FROM users 
-                                        WHERE NOT EXISTS (SELECT id FROM users 
-                                            WHERE `email`=:email LIMIT 1);
-
-                                        SELECT LAST_INSERT_ID() as userId;'
-                                    );
-                $stmt->execute(['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password]);
                 
+                $checkEmail = $conn->prepare('SELECT email FROM users WHERE email=:email');
+                $checkEmail->execute(['email' => $email]);
 
-                if ($stmt->rowCount() > 0) {
-                    $userId = $conn->lastInsertId();
-                    $_SESSION['unique_id'] = $userId;
-                    return "userAdded";
+                if ($checkEmail->rowCount() == 0) { 
+                    $stmt = $conn->prepare('INSERT INTO users (fName, lName, email, password)
+                                            VALUES (:firstName, :lastName, :email, :password);
+                                            SELECT LAST_INSERT_ID() as userId;'
+                                            );
+                    $stmt->execute(['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password]);
+
+                    if ($stmt->rowCount() > 0) {
+                        $userId = $conn->lastInsertId();
+                        $_SESSION['unique_id'] = $userId;
+                        return "userAdded";
+                    }
                 }
+
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }

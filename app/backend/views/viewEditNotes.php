@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-12">
                     <h2 class=" w-100">
-                        else {echo "Does not exits"; } 
+                        <?php echo $note[0]["title"] ?>
                         <div class="float-right">
                             <span class=" font-italic text-dark"><?php echo $note[0]["created"] ?></span>
                         </div>

@@ -80,9 +80,7 @@ function getNote() {
                                 </div>
                             </div>
                             <div id="htmlText" class="row" style="display: contents;">
-                                <div class="col-12">
                                     ${data[0].textHtml}
-                                </div>
                             </div>`
                 }
 
