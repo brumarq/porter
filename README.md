@@ -1,5 +1,6 @@
 # Porter
-A platform to keep track of your notes and assignments. Prefect for your studies.
+A platform to keep track of your notes and assignments. Perfect for your studies.
+( First personal PHP Project) 
 
 ![image](https://user-images.githubusercontent.com/44119479/162631202-ac4057f1-5a92-44e2-9802-37bf91b6efc2.png)
 
