@@ -1,6 +1,8 @@
 # Porter
 A platform to keep track of your notes and assignments. Prefect for your studies.
 
+![image](https://user-images.githubusercontent.com/44119479/162631202-ac4057f1-5a92-44e2-9802-37bf91b6efc2.png)
+
 ## Description
 During my studies I have had a hard time keeping all my notes, assignments, tasks and calendar in only one place. There is notion.so that gives those options, however, notion gives us to many options and I feel overwhelmed and end up customizing it instead of organizing my studies. So, instead of using someone else's application, why not build one myself.  
 
